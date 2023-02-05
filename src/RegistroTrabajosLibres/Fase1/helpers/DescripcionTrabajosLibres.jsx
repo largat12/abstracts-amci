@@ -1,6 +1,15 @@
+import { faArrowRight } from '@fortawesome/free-solid-svg-icons'
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import React from 'react'
+import { Button, Col, Container, Row } from 'react-bootstrap'
 
-export const Descripcion = () => {
+export const DescripcionTrabajosLibres = ({setactiveForm}) => {
+
+  const hangleDescriptionTrabajosLibres = (e) => {
+    e.preventDefault();
+    setactiveForm(true)
+  }
+
   return (
     <div className='description-formulario-registro'>
         <p>Bienvenido al sistema en línea para la convocatoria de trabajos libres del Congreso Nacional AMCI 2021 que se realizará del 26 al 28 de mayo de 2021 de forma virtual. <br/>
@@ -19,7 +28,14 @@ export const Descripcion = () => {
             <li>Por lo menos uno de los autores del resumen sometido debe ser miembro de la AMCI para poder presentar en el congreso.</li>
             <li>En caso de que el autor presentador del resumen inscrito en el sistema cambie, debe notificarlo con tiempo a la organización, de lo contario no se tendrá en cuenta el trabajo para ser presentado en el congreso.</li>
         </ul>
-        <p>Para solucionar cualquier duda o si requiere información adicional comuníquese con el Comité Organizador del congreso a través del correo electrónico <a href="mailto:abstract@comunicacionesefectivas.zendesk.com" target="_blank">abstract@comunicacionesefectivas.zendesk.com</a></p>
+        <p>Para solucionar cualquier duda o si requiere información adicional comuníquese con el Comité Organizador del congreso a través del correo electrónico <a href="mailto:abstract@comunicacionesefectivas.zendesk.com" target="_blank" rel="noreferrer">abstract@comunicacionesefectivas.zendesk.com</a></p>
+        <Container fluid>
+          <Row className='m-0'>
+            <Col xs={12} className='d-flex justify-content-end'>
+              <Button className="btn-custom " onClick={hangleDescriptionTrabajosLibres}><p>Siguiente <FontAwesomeIcon icon={ faArrowRight}/></p></Button>
+            </Col>
+          </Row>
+        </Container>
     </div>
   )
 }

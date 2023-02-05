@@ -11,3 +11,13 @@
     background: var(--bg-primary-hover);
     border-color: var(--bg-primary-hover);
 }
+button.btn-custom p {
+    margin-bottom: 0px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 8px;
+}
+button.btn-custom svg {
+    margin: 0px 6px;
+}
