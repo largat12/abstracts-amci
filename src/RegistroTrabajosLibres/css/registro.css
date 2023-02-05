@@ -1,0 +1,71 @@
+.session-header {
+    color: #616163;
+    border-bottom: 1px solid #c4c4c4;
+    margin-bottom: 10px;
+    padding: 6px;
+    font-size: .75rem;
+}
+.contenedor-registro{
+    max-width: 900px;
+    padding: 20px;
+    box-shadow: 0 30px 100px rgb(0 0 0 / 17%);
+    background:white;
+    margin: 20px auto;
+    border-radius: 16px;
+}
+.content-session .item-seccion {
+    background: var(--bg-secundary);
+    padding: 10px;
+}
+
+.content-session .item-seccion p {
+    color: var(--text-color);
+    margin-bottom: 0px;
+}
+
+.content-session .item-seccion p.description.session {
+    font-size: .85rem;
+    font-weight: 400;
+    line-height: 1.2;
+}
+.content-session {
+    margin: 10px 0px;
+    border-radius: 16px;
+    overflow: hidden;
+    padding: 0px;
+    background: var(--bg-secundary);
+    box-shadow: 0 1px 18px rgb(0 0 0 / 15%);
+}
+.content-session .item-seccion {
+    border-right: 1px solid white;
+}
+
+.content-session .item-seccion:last-child {
+    border-right: none;
+}
+.content-session > .row {
+    margin: 0px;
+}
+
+.content-session .item-seccion.active {
+    background: var(--bg-primary);
+}
+
+.content-session .item-seccion.active p {
+    color: white;
+}
+.content-session .item-seccion {
+    border-right: 1px solid white;
+}
+
+.content-session .item-seccion:last-child {
+    border-right: none;
+}
+
+.content-session .item-seccion p.title.session {
+    border-bottom: 1px solid;
+    line-height: 1;
+    padding-bottom: 10px;
+    margin-bottom: 10px;
+    font-weight: 700;
+}

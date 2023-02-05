@@ -1,0 +1,25 @@
+.error404.container {
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.error404.container .col-12 {
+    text-align: center;
+}
+
+.error404.container .col-12 h1 {
+    font-size: 12rem;
+    line-height: 0.8;
+}
+.error404.container button p {
+    margin-bottom: 0px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.error404.container button p svg {
+    margin-left: 6px;
+}
