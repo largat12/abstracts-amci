@@ -3,3 +3,11 @@
     background-repeat: repeat;
     background-position: center center;
 }
+.btn-custom {
+    background: var(--bg-primary);
+    border-color: var(--bg-primary);
+}
+.btn-custom:hover, .btn-custom:focus, .btn-custom:active{
+    background: var(--bg-primary-hover);
+    border-color: var(--bg-primary-hover);
+}

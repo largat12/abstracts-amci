@@ -5,6 +5,7 @@ import { BannerSuperior } from '../bannner/BannerSuperior'
 import { ContextApp } from '../context/contextApp'
 import { SessionActual } from './seccionesActuales/SessionActual'
 import { Secciones } from './secciones/Secciones'
+import { FormularioPersona } from './Fase1/FormularioPersona'
 
 export const RegistroTrabajosLibres = () => {
   const {dataRegistro} = useContext(ContextApp) 
@@ -16,6 +17,9 @@ export const RegistroTrabajosLibres = () => {
               <SessionActual actual={dataRegistro.seccionState} total={dataRegistro.seccionTotal}/>
               <BannerSuperior />
               <Secciones actual={dataRegistro.seccionState} />
+              {// -------- session 1 -----
+                  dataRegistro.seccionState === 1 ? <FormularioPersona /> : ""}
+              
             </Col>
           </Row>
         </Container>

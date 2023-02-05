@@ -21,7 +21,7 @@ export const Error404 = () => {
                     <h1>404</h1>
                     <h3>Parece que estás perdido.</h3>
                     <p>Parece que no podemos encontrar la página que estás buscando.</p>
-                    <Button onClick={hangleErro404}><p>Volver al inicio<FontAwesomeIcon icon={faArrowRight}/></p></Button>
+                    <Button onClick={hangleErro404} className="btn-custom"><p>Volver al inicio<FontAwesomeIcon icon={faArrowRight}/></p></Button>
                 </Col>
             </Row>
         </Container>
