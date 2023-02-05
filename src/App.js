@@ -1,25 +1,28 @@
-import logo from './logo.svg';
+
+
+import { useContext } from 'react';
+import { BrowserRouter, Route, Routes } from 'react-router-dom';
+import { Error404 } from './404/Error404';
 import './App.css';
+import { ContextApp } from './context/contextApp';
+import { RegistroTrabajosLibres } from './RegistroTrabajosLibres/RegistroTrabajosLibres';
+import { RouterProtected } from './RouterProtected/RouterProtected';
 
 function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+
+    const {user} = useContext(ContextApp)
+
+
+    return (
+        <BrowserRouter>
+          <Routes>
+            <Route path='/' element={ <h1>asdasd</h1> }/>
+            <Route path='/registro-trabajos-libres' element={<RegistroTrabajosLibres/>}/>
+            <Route path='/administracion' element={<RouterProtected user={user}><h1>Registro de trabajos libres</h1></RouterProtected>}/>
+            <Route path='*' element={<Error404/>} />
+          </Routes>
+        </BrowserRouter>
+    );
 }
 
 export default App;
