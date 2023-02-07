@@ -12,7 +12,7 @@ export const DescripcionTrabajosLibres = ({setactiveForm}) => {
 
   return (
     <div className='description-formulario-registro'>
-        <p>Bienvenido al sistema en línea para la convocatoria de trabajos libres del Congreso Nacional AMCI 2021 que se realizará del 26 al 28 de mayo de 2021 de forma virtual. <br/>
+        <p>Bienvenido al sistema en línea para la convocatoria de trabajos libres del Congreso Nacional AMCI 2023 que se realizará del 17 de febrero al 1 de abril de 2023 de forma virtual. <br/>
         Este sistema consta de cuatro secciones:</p>
         <ul>
             <li><strong>Sección 1:</strong> Datos del autor designado como persona de contacto.</li>
@@ -28,10 +28,10 @@ export const DescripcionTrabajosLibres = ({setactiveForm}) => {
             <li>Por lo menos uno de los autores del resumen sometido debe ser miembro de la AMCI para poder presentar en el congreso.</li>
             <li>En caso de que el autor presentador del resumen inscrito en el sistema cambie, debe notificarlo con tiempo a la organización, de lo contario no se tendrá en cuenta el trabajo para ser presentado en el congreso.</li>
         </ul>
-        <p>Para solucionar cualquier duda o si requiere información adicional comuníquese con el Comité Organizador del congreso a través del correo electrónico <a href="mailto:abstract@comunicacionesefectivas.zendesk.com" target="_blank" rel="noreferrer">abstract@comunicacionesefectivas.zendesk.com</a></p>
-        <Container fluid>
+        <p>Para solucionar cualquier duda o si requiere información adicional comuníquese con el Comité Organizador del congreso a través del correo electrónico <a href="mailto:abstract@amci.org.co" target="_blank" rel="noreferrer">abstract@amci.org.co</a></p>
+        <Container fluid className=' p-0'>
           <Row className='m-0'>
-            <Col xs={12} className='d-flex justify-content-end'>
+            <Col xs={12} className='d-flex justify-content-end  p-0'>
               <Button className="btn-custom " onClick={hangleDescriptionTrabajosLibres}><p>Siguiente <FontAwesomeIcon icon={ faArrowRight}/></p></Button>
             </Col>
           </Row>

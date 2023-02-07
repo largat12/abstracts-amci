@@ -8,17 +8,17 @@ import { Secciones } from './secciones/Secciones'
 import { Fase1 } from './Fase1/Fase1'
 
 export const RegistroTrabajosLibres = () => {
-  const {dataRegistro} = useContext(ContextApp) 
+  const {dataContextApp} = useContext(ContextApp) 
   return (
     <Container fluid className='contenedor-app-registro bg-lines'>
         <Container className='contenedor-registro'>
           <Row>
             <Col xs={12}>
-              <SessionActual actual={dataRegistro.seccionState} total={dataRegistro.seccionTotal}/>
+              <SessionActual actual={dataContextApp.seccionState} total={dataContextApp.seccionTotal}/>
               <BannerSuperior />
-              <Secciones actual={dataRegistro.seccionState} />
+              <Secciones actual={dataContextApp.seccionState} />
               {// -------- session 1 -----
-                  dataRegistro.seccionState === 1 ? <Fase1/>: ""}
+                  dataContextApp.seccionState === 1 ? <Fase1/>: ""}
               
             </Col>
           </Row>

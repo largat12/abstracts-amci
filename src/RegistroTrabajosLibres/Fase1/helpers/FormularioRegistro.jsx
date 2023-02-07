@@ -1,18 +1,10 @@
-import { faArrowLeft, faArrowRight } from '@fortawesome/free-solid-svg-icons'
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+
 import React from 'react'
-import { Button, Col, Container, Row } from 'react-bootstrap'
 import { FormularioInscripcion } from './Formulario/FormularioInscripcion'
 
 export const FormularioRegistro = ({setactiveForm}) => {
 
-  const hangleAtrasPage = (e) => {
-    e.preventDefault();
-    setactiveForm(false)
-  }
-  const hangleSiguienteFace = (e) => {
-
-  }
+  
   return (
     <>
         <div className='description-formulario-registro'>
@@ -25,17 +17,8 @@ export const FormularioRegistro = ({setactiveForm}) => {
                 <li>En el campo del correo electrónico, coloque una sola dirección. Este campo es de gran importancia, ya que todas las instrucciones y notificaciones serán enviadas a través del mismo.</li>
             </ul>
         </div>
-        <FormularioInscripcion/>
-        <Container fluid>
-          <Row className='m-0'>
-            <Col xs={6} className='d-flex justify-content-start'>
-              <Button className="btn-custom " onClick={hangleAtrasPage}><p><FontAwesomeIcon icon={ faArrowLeft}/> Anterior</p></Button>
-            </Col>
-            <Col xs={6} className='d-flex justify-content-end'>
-              <Button className="btn-custom " onClick={hangleSiguienteFace}><p>Siguiente <FontAwesomeIcon icon={ faArrowRight}/></p></Button>
-            </Col>
-          </Row>
-        </Container>
+        <FormularioInscripcion setactiveForm={setactiveForm}/>
+        
     </>
   )
 }

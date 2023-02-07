@@ -11,7 +11,7 @@ export const Fase1 = () => {
         <Container fluid className='formulario-registro'>
             <Row className='m-0'>
                 <Col xs={12}>
-                    <h1 className='text-center' style={{color:"var(--bg-primary)"}}>CONVOCATORIA DE RESÚMENES <br />HABILITADA HASTA  EL 6 DE MAYO DE 2021</h1>
+                    <h1 className='text-center' style={{color:"var(--bg-primary)"}}>CONVOCATORIA DE RESÚMENES <br />HABILITADA HASTA  EL 1 DE ABRIL DE 2021</h1>
                     {activeForm ? <FormularioRegistro setactiveForm={setactiveForm}/> : <DescripcionTrabajosLibres setactiveForm={setactiveForm}/>}
                 </Col>
             </Row>
