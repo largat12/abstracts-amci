@@ -3,21 +3,32 @@ import { createContext, useEffect, useState } from "react";
 export const ContextApp = createContext()
 
 export const ContextAppProvider = ({children}) => {
-    const [dataContextApp, setDataContextApp] = useState({"seccionState":1,"seccionTotal":4,"dataRegistreUser":null})
-    const [user, setUser] = useState("")
-    const [dataFase1, setDataFase1] = useState({})
+    const [dataContextApp, setDataContextApp] = useState({"seccionState":2,"seccionTotal":4,"formRegister":{"activeFormFase1": false}, "usersRegister":[]})
+    const [userRegisterMain, setUserRegisterMain] = useState({})
+    
 
     useEffect(() => {
-        setDataContextApp({
-            ...dataContextApp,
-            fase1: dataFase1
-        })
-    }, [dataFase1])
+        if(dataContextApp.seccionState === 2){
+            let users = [...dataContextApp.usersRegister]
+            /* -----------------validacion de usuarios----------*/
+            if(users.length === 0 ){
+                users.push({...userRegisterMain})
+            }
+            else{
+
+            }
+            /*-----------------insertando informacion-----------*/
+            setDataContextApp({
+                ...dataContextApp,
+                usersRegister:users
+            })
+        }
+    }, [userRegisterMain, dataContextApp.seccionState])
     
 
 
     return(
-        <ContextApp.Provider value={{dataContextApp, setDataContextApp, user, setUser, dataFase1, setDataFase1}}>
+        <ContextApp.Provider value={{dataContextApp, setDataContextApp, userRegisterMain, setUserRegisterMain}}>
             {children}
         </ContextApp.Provider>
     )

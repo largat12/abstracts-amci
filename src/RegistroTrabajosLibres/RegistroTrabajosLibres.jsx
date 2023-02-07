@@ -6,6 +6,9 @@ import { ContextApp } from '../context/contextApp'
 import { SessionActual } from './seccionesActuales/SessionActual'
 import { Secciones } from './secciones/Secciones'
 import { Fase1 } from './Fase1/Fase1'
+import { Fase2 } from './Fase2/Fase2'
+import { Fase3 } from './Fase3/Fase3'
+import { Fase4 } from './Fase4/Fase4'
 
 export const RegistroTrabajosLibres = () => {
   const {dataContextApp} = useContext(ContextApp) 
@@ -17,8 +20,15 @@ export const RegistroTrabajosLibres = () => {
               <SessionActual actual={dataContextApp.seccionState} total={dataContextApp.seccionTotal}/>
               <BannerSuperior />
               <Secciones actual={dataContextApp.seccionState} />
-              {// -------- session 1 -----
-                  dataContextApp.seccionState === 1 ? <Fase1/>: ""}
+                  {// -------- session 1 -----
+                  dataContextApp.seccionState === 1 ? <Fase1 />: ""}
+                  {// -------- session 2 -----
+                  dataContextApp.seccionState === 2 ? <Fase2 />: ""}
+                  {// -------- session 3 -----
+                  dataContextApp.seccionState === 3 ? <Fase3 />: ""}
+                  {// -------- session 4 -----
+                  dataContextApp.seccionState === 4 ? <Fase4 />: ""}
+
               
             </Col>
           </Row>
