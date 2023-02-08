@@ -6,6 +6,7 @@ import { ContextApp } from '../../../../context/contextApp';
 
 export const FormularioInscripcion = () => {
   const {dataContextApp, setDataContextApp, userRegisterMain, setUserRegisterMain} = useContext(ContextApp)
+  
   const [validated, setValidated] = useState(false);
 
 
@@ -68,9 +69,10 @@ export const FormularioInscripcion = () => {
       setValidated(formErrors)
     }
     else{
+      
       setUserRegisterMain({
         ...userRegisterMain,
-        presentAutor: true  
+        presentador: true  
       })
       setDataContextApp({
         ...dataContextApp,
