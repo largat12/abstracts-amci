@@ -92,7 +92,6 @@ export const FormularioInvestigadores = ({userUpdateRegister, setUserUpdateRegis
     
   }
 
-  console.log("validatedLoad", validatedLoad)
   return (
     <Form onSubmit={hangleAddUser} className="mb-3">
       <Row>

@@ -37,7 +37,6 @@ export const ContextAppProvider = ({children}) => {
             
         }
     }, [dataContextApp.seccionState])
-
     //incrementar seccion
     const nextSection = ()=>{
         let seccionActual = {...dataContextApp}
@@ -70,9 +69,7 @@ export const ContextAppProvider = ({children}) => {
                 usersRegister:[...users,user]
             })
             return true
-        }
-
-        
+        }  
     }
     //remover investigador
     const removeUserRegister = (id) => {
@@ -91,6 +88,13 @@ export const ContextAppProvider = ({children}) => {
         let users = [...dataContextApp.usersRegister]
         let user = {...userRegister}
         const respuesta = []
+        /*-------- validar si el usuario viene como presentador --------------*/
+        if(user.presentador){
+            users.forEach( (item)=> {
+                return item.presentador = false
+            })
+        }
+        /*-------- cargar la actualizacion del usuario --------------*/
         users.forEach((item) => {
             if(item.numeroDeIdentificacion === user.numeroDeIdentificacion){
                 respuesta.push(user)
