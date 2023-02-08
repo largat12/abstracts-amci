@@ -6,7 +6,7 @@ import { Alert, Button, Col, FloatingLabel, Form, Row } from 'react-bootstrap'
 import { ContextApp } from '../../../context/contextApp';
 
 export const FormularioInvestigadores = () => { 
-  const {updateUsersRegister} = useContext(ContextApp)
+  const {addUsersRegister} = useContext(ContextApp)
   const [userRegister, setUserRegister] = useState({})
   const [validated, setValidated] = useState(false);
   const [validatedLoad, setValidatedLoad] = useState(false);
@@ -17,7 +17,6 @@ export const FormularioInvestigadores = () => {
 
 
   const changeField = (field, value) => {
-    console.log(field, value)
     setValidatedLoad(false)
     setUserRegister({
       ...userRegister,
@@ -62,7 +61,7 @@ export const FormularioInvestigadores = () => {
   }
   const handleGuardarInvestigador = (e) =>{
     e.preventDefault()
-    let response = updateUsersRegister(userRegister)
+    let response = addUsersRegister(userRegister)
     if(!response){
       setValidatedLoad(true)
     }

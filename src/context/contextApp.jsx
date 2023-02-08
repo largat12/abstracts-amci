@@ -25,7 +25,21 @@ export const ContextAppProvider = ({children}) => {
     }, [dataContextApp.seccionState])
 
 
-    const updateUsersRegister = (userRegister) => {
+    //incrementar seccion
+    const nextSection = ()=>{
+        let seccionActual = {...dataContextApp}
+        setDataContextApp({
+            ...dataContextApp,
+            seccionState:seccionActual.seccionState + 1 > 4 ? seccionActual.seccionState : seccionActual.seccionState + 1  
+        })
+    }
+
+
+    /*------------------------------------------------------*/
+    /*------------------------------------------------------*/
+    /*------------------------------------------------------*/
+    //agregar investigadores despues del autor
+    const addUsersRegister = (userRegister) => {
         let users = [...dataContextApp.usersRegister]
         let user = {...userRegister}
         if(user.presentador){
@@ -50,13 +64,31 @@ export const ContextAppProvider = ({children}) => {
 
         
     }
+    //remover investigador
+    const removeUserRegister = (id) => {
+        let users = [...dataContextApp.usersRegister] 
+        let result = users.filter((user) => {
+            return user.numeroDeIdentificacion !== id
+        })
+        setDataContextApp({
+            ...dataContextApp,
+            usersRegister:result
+        })
+
+    }
+    //editar investigador
+    const updateUserRegister = (id) => {
+
+    }
+
+
     
     
 
 
 
     return(
-        <ContextApp.Provider value={{dataContextApp, setDataContextApp, userRegisterMain, setUserRegisterMain, updateUsersRegister}}>
+        <ContextApp.Provider value={{dataContextApp, setDataContextApp, userRegisterMain, setUserRegisterMain, nextSection, addUsersRegister, removeUserRegister, updateUserRegister}}>
             {children}
         </ContextApp.Provider>
     )

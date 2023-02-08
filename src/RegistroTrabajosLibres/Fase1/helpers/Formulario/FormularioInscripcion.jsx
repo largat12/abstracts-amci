@@ -5,13 +5,8 @@ import { Button, Col, Container, FloatingLabel, Form, Row } from 'react-bootstra
 import { ContextApp } from '../../../../context/contextApp';
 
 export const FormularioInscripcion = () => {
-  const {dataContextApp, setDataContextApp, userRegisterMain, setUserRegisterMain} = useContext(ContextApp)
-  
+  const {dataContextApp, setDataContextApp, nextSection, userRegisterMain, setUserRegisterMain} = useContext(ContextApp)
   const [validated, setValidated] = useState(false);
-
-
-  
-
 
   const changeField = (field, value) => {
     setUserRegisterMain({
@@ -74,14 +69,10 @@ export const FormularioInscripcion = () => {
         ...userRegisterMain,
         presentador: true  
       })
-      setDataContextApp({
-        ...dataContextApp,
-        seccionState:2
-      })
+
+      nextSection()
     }
   }
-
-  
 
   return (
     <Form onSubmit={hangleSiguienteFace}>
