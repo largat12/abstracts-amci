@@ -1,4 +1,4 @@
-import React, { useContext } from 'react'
+import React, { useContext, useState } from 'react'
 import { faArrowLeft, faArrowRight } from '@fortawesome/free-solid-svg-icons'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { Container, Row, Col, Button} from 'react-bootstrap'
@@ -8,6 +8,8 @@ import { MapInvestigadores } from './helpers/MapInvestigadores'
 
 export const Fase2 = () => {
     const {dataContextApp, setDataContextApp} = useContext(ContextApp)
+    const [userUpdateRegister, setUserUpdateRegister] = useState(null)
+
 
     const hangleAtrasPage = () =>{
         setDataContextApp({
@@ -15,9 +17,20 @@ export const Fase2 = () => {
           seccionState: 1
         })
     }
+
+    const consultarRegisterUser = (idUser) => {
+        let users = [...dataContextApp.usersRegister]
+        let user = users.find(item => item.numeroDeIdentificacion === idUser)
+        setUserUpdateRegister(user)
+        
+    }
+
     const hangleSiguienteFace = () => {
         
     }
+
+
+
     return (
         <Container fluid className='formulario-registro'>
                 <Row className='m-0'>
@@ -33,9 +46,9 @@ export const Fase2 = () => {
                                 <li>Confirme la veracidad de los datos y presione el botón "Siguiente".</li>
                             </ul>
                         </div>
-                        <FormularioInvestigadores />
+                        <FormularioInvestigadores userUpdateRegister={userUpdateRegister} setUserUpdateRegister={setUserUpdateRegister}/>
                         <h5 className='text-center'><strong>LISTA DE INVESTIGADORES</strong></h5>
-                        <MapInvestigadores />    
+                        <MapInvestigadores consultarRegisterUser={consultarRegisterUser}/>    
 
 
                         <Container fluid className=' p-0'>

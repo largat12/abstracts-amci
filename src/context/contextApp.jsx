@@ -6,8 +6,6 @@ export const ContextAppProvider = ({children}) => {
     const [dataContextApp, setDataContextApp] = useState({"seccionState":1,"seccionTotal":4,"formRegister":{"activeFormFase1": false}, "usersRegister":[]})
     const [userRegisterMain, setUserRegisterMain] = useState({})
     
-
-
     /*guardar el primer usuario*/
     useEffect(() => {
         //cargar primer usuario que registra el trabajo
@@ -16,14 +14,29 @@ export const ContextAppProvider = ({children}) => {
             let user = {...userRegisterMain}
             if(users.length === 0){
                 users.push(user)
+                setDataContextApp({
+                    ...dataContextApp,
+                    usersRegister:users
+                })
             }
-            setDataContextApp({
-                ...dataContextApp,
-                usersRegister:users
-            })
+            else{
+                const respuesta = []
+                users.forEach((item) => {
+                    if(item.numeroDeIdentificacion === user.numeroDeIdentificacion){
+                        respuesta.push({...user})
+                    }
+                    else{
+                        respuesta.push({...item})
+                    }
+                })
+                setDataContextApp({
+                    ...dataContextApp,
+                    usersRegister:respuesta
+                })
+            }
+            
         }
     }, [dataContextApp.seccionState])
-
 
     //incrementar seccion
     const nextSection = ()=>{
@@ -33,8 +46,6 @@ export const ContextAppProvider = ({children}) => {
             seccionState:seccionActual.seccionState + 1 > 4 ? seccionActual.seccionState : seccionActual.seccionState + 1  
         })
     }
-
-
     /*------------------------------------------------------*/
     /*------------------------------------------------------*/
     /*------------------------------------------------------*/
@@ -50,7 +61,6 @@ export const ContextAppProvider = ({children}) => {
         let existUser = users.some((item) => {
             return item.numeroDeIdentificacion === user.numeroDeIdentificacion || item.email === user.telefonoCelular  || item.telefonoCelular === user.telefonoCelular
         })
-        console.log("users", users, "existUser", existUser)
         if(existUser){
             return false
         }
@@ -77,8 +87,23 @@ export const ContextAppProvider = ({children}) => {
 
     }
     //editar investigador
-    const updateUserRegister = (id) => {
-
+    const updateUserRegister = (userRegister) => {
+        let users = [...dataContextApp.usersRegister]
+        let user = {...userRegister}
+        const respuesta = []
+        users.forEach((item) => {
+            if(item.numeroDeIdentificacion === user.numeroDeIdentificacion){
+                respuesta.push(user)
+            }
+            else{
+                respuesta.push({...item})
+            }
+        })
+        setDataContextApp({
+            ...dataContextApp,
+            usersRegister:respuesta
+        })
+        return true
     }
 
 

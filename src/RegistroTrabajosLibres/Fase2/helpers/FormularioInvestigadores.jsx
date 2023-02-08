@@ -1,23 +1,26 @@
 
 import { faSave } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import React, { useContext, useState } from 'react'
+import React, { useContext, useEffect, useState } from 'react'
 import { Alert, Button, Col, FloatingLabel, Form, Row } from 'react-bootstrap'
 import { ContextApp } from '../../../context/contextApp';
 
-export const FormularioInvestigadores = () => { 
-  const {addUsersRegister} = useContext(ContextApp)
+export const FormularioInvestigadores = ({userUpdateRegister, setUserUpdateRegister}) => { 
+  
+  const {addUsersRegister, updateUserRegister} = useContext(ContextApp)
   const [userRegister, setUserRegister] = useState({})
   const [validated, setValidated] = useState(false);
-  const [validatedLoad, setValidatedLoad] = useState(false);
+  const [validatedLoad, setValidatedLoad] = useState(null);
   
 
   
-
+  useEffect(()=>{
+      setUserRegister({...userUpdateRegister})
+  },[userUpdateRegister])
 
 
   const changeField = (field, value) => {
-    setValidatedLoad(false)
+    setValidatedLoad(null)
     setUserRegister({
       ...userRegister,
       [field]: typeof value === 'boolean' ? value : value.toUpperCase()
@@ -30,7 +33,7 @@ export const FormularioInvestigadores = () => {
     }
   }
   const validateForm = () => {
-    const { titulo, nombre, apellido, email, tipoDeIdentificacion, numeroDeIdentificacion, organizacionUniversidad, cargo, direccion, pais, departamento, ciudad, telefonoFijo, telefonoCelular} = userRegister
+    const { titulo, nombre, apellido, email, tipoDeIdentificacion, numeroDeIdentificacion, organizacionUniversidad, cargo, direccion, pais, departamento, ciudad, telefonoFijo, telefonoCelular, miembroAMCI} = userRegister
     const newErros = {}
     
     if(!titulo                  || titulo === ''                      || titulo === undefined) newErros.titulo = 'Titulo obligatorio'
@@ -49,7 +52,7 @@ export const FormularioInvestigadores = () => {
     if(!telefonoFijo            || telefonoFijo === ''                || telefonoFijo === undefined) newErros.telefonoFijo = 'Teléfono fijo obligatorio'
     if(!telefonoCelular         || telefonoCelular === ''             || telefonoCelular === undefined) newErros.telefonoCelular = 'Teléfono celular obligatorio'
 
-
+    if(!miembroAMCI || miembroAMCI === '' || miembroAMCI === undefined) newErros.miembroAMCI = 'Mimebro AMCI obligatorio' 
     return newErros
   }
   const hangleAddUser = (e) =>{
@@ -61,16 +64,38 @@ export const FormularioInvestigadores = () => {
   }
   const handleGuardarInvestigador = (e) =>{
     e.preventDefault()
-    let response = addUsersRegister(userRegister)
-    if(!response){
-      setValidatedLoad(true)
+    /*------agregar guario---------*/
+    if(userUpdateRegister === null){
+      let response = addUsersRegister(userRegister)
+      if(!response){
+        setValidatedLoad({"status":"danger", "msg":"Revisar información suministrada, no se puede tener el mismo email, identificación o teléfono celular igual a otro investigador"})
+      }
+      else{
+        setValidatedLoad({"status":"success", "msg":"Ingresado investigador correctamente"})
+      }
     }
+    /*------guardar usuario editado ----- */
+    else if(userUpdateRegister !== null){
+      let response = updateUserRegister(userRegister)
+      if(!response){
+        setValidatedLoad({"status":"danger", "msg":"Revisar información suministrada, no se puede tener el mismo email, identificación o teléfono celular igual a otro investigador"})
+      }
+      else{
+        setValidatedLoad({"status":"success", "msg":"Cambios de investigador guardados correctamente"})
+      }
+    }
+    setUserUpdateRegister(null)
+    setInterval(()=>{
+      setValidatedLoad(null)
+    }, 3000)
+
+    
   }
 
-
+  console.log("validatedLoad", validatedLoad)
   return (
     <Form onSubmit={hangleAddUser} className="mb-3">
-    <Row>
+      <Row>
         <Col xs={12}>
             <FloatingLabel controlId='floatingTitulo' label="TITULO (Dr. / Enfro. / Tr. / Ft. / Lic.)" className='mb-3'>
                   <Form.Control type='text' placeholder='TITULO' name='titulo' required onChange={(e) => {changeField(e.target.name, e.target.value)} } value={userRegister.titulo === undefined ? "" : userRegister.titulo} isInvalid={!!validated.titulo}/>
@@ -219,6 +244,20 @@ export const FormularioInvestigadores = () => {
         </Col>
       </Row>
       <Row>
+        <Col xs={12}>
+            <FloatingLabel controlId='floatingMiembroAMCI' label="MIEMBRO AMCI" className='mb-3'>
+                <Form.Select size="sm" name='miembroAMCI' placeholder='MIEMBRO AMCI' required onChange={(e) => {changeField(e.target.name, e.target.value)} } value={userRegister.miembroAMCI === undefined ? "" : userRegister.miembroAMCI}  isInvalid={!!validated.miembroAMCI}>
+                  <option value=''>SELECCIONE RESPUESTA</option>
+                  <option value="SI">SI</option>
+                  <option value="NO">NO</option>
+                </Form.Select>
+                <Form.Control.Feedback  type="invalid">
+                {validated.miembroAMCI}
+                </Form.Control.Feedback>
+            </FloatingLabel> 
+        </Col>
+      </Row>  
+      <Row>
         <Col xs={6}>
             <Form.Check type='checkbox' label='¿ES PRESENTADOR?' name='presentador' required onChange={(e) => {changeField(e.target.name, e.target.checked )} } value={userRegister.presentador === undefined ? "" : userRegister.presentador} /> 
         </Col>
@@ -226,7 +265,7 @@ export const FormularioInvestigadores = () => {
             <Button onClick={handleGuardarInvestigador} className="btn-custom"><p>Guardar <FontAwesomeIcon icon={faSave} /></p></Button>
         </Col>
       </Row>
-      {validatedLoad ? <Alert className='mt-4' key='danger' variant='danger'>Revisar información suministrada, no se puede tener el mismo email, identificación o teléfono celular igual a otro investigador</Alert> : ''}
+      {validatedLoad !== null ? <Alert className='mt-4' key={validatedLoad.status} variant={validatedLoad.status}>{validatedLoad.msg}</Alert> : ''}
       
     </Form>
   )
