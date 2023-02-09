@@ -36,7 +36,7 @@ export const FormularioInvestigadores = ({userUpdateRegister, setUserUpdateRegis
     const { titulo, nombre, apellido, email, tipoDeIdentificacion, numeroDeIdentificacion, organizacionUniversidad, cargo, direccion, pais, departamento, ciudad, telefonoFijo, telefonoCelular, miembroAMCI} = userRegister
     const newErros = {}
     
-    if(!titulo                  || titulo === ''                      || titulo === undefined) newErros.titulo = 'Titulo obligatorio'
+    if(!titulo                  || titulo === ''                      || titulo === undefined) newErros.titulo = 'Título obligatorio'
     if(!nombre                  || nombre === ''                      || nombre === undefined) newErros.nombre = 'Nombre (s) obligatorio' 
     if(!apellido                || apellido === ''                    || apellido === undefined) newErros.apellido = 'Apellido (s) obligatorio'
     if(!email                   || email === ''                       || email === undefined) newErros.email = 'Email obligatorio' 
@@ -59,45 +59,42 @@ export const FormularioInvestigadores = ({userUpdateRegister, setUserUpdateRegis
     e.preventDefault()
     const formErrors = validateForm();
     if(Object.keys(formErrors).length > 0){
-      setValidated(formErrors)
+        setValidated(formErrors)
     }
-  }
-  const handleGuardarInvestigador = (e) =>{
-    e.preventDefault()
-    /*------agregar guario---------*/
-    if(userUpdateRegister === null){
-      let response = addUsersRegister(userRegister)
-      if(!response){
-        setValidatedLoad({"status":"danger", "msg":"Revisar información suministrada, no se puede tener el mismo email, identificación o teléfono celular igual a otro investigador"})
-      }
-      else{
-        setValidatedLoad({"status":"success", "msg":"Ingresado investigador correctamente"})
-      }
+    else{
+        /*------agregar guario---------*/
+        if(userUpdateRegister === null){
+          let response = addUsersRegister(userRegister)
+          if(!response){
+            setValidatedLoad({"status":"danger", "msg":"Revisar información suministrada, no se puede tener el mismo email, identificación o teléfono celular igual a otro investigador"})
+          }
+          else{
+            setValidatedLoad({"status":"success", "msg":"Ingresado investigador correctamente"})
+          }
+        }
+        /*------guardar usuario editado ----- */
+        else if(userUpdateRegister !== null){
+          let response = updateUserRegister(userRegister)
+          if(!response){
+            setValidatedLoad({"status":"danger", "msg":"Revisar información suministrada, no se puede tener el mismo email, identificación o teléfono celular igual a otro investigador"})
+          }
+          else{
+            setValidatedLoad({"status":"success", "msg":"Cambios de investigador guardados correctamente"})
+          }
+        }
+        setUserUpdateRegister(null)
+        setInterval(()=>{
+          setValidatedLoad(null)
+        }, 3000)
     }
-    /*------guardar usuario editado ----- */
-    else if(userUpdateRegister !== null){
-      let response = updateUserRegister(userRegister)
-      if(!response){
-        setValidatedLoad({"status":"danger", "msg":"Revisar información suministrada, no se puede tener el mismo email, identificación o teléfono celular igual a otro investigador"})
-      }
-      else{
-        setValidatedLoad({"status":"success", "msg":"Cambios de investigador guardados correctamente"})
-      }
-    }
-    setUserUpdateRegister(null)
-    setInterval(()=>{
-      setValidatedLoad(null)
-    }, 3000)
-
-    
   }
 
   return (
     <Form onSubmit={hangleAddUser} className="mb-3">
       <Row>
         <Col xs={12}>
-            <FloatingLabel controlId='floatingTitulo' label="TITULO (Dr. / Enfro. / Tr. / Ft. / Lic.)" className='mb-3'>
-                  <Form.Control type='text' placeholder='TITULO' name='titulo' required onChange={(e) => {changeField(e.target.name, e.target.value)} } value={userRegister.titulo === undefined ? "" : userRegister.titulo} isInvalid={!!validated.titulo}/>
+            <FloatingLabel controlId='floatingTitulo' label="TÍTULO (Dr. / Enfro. / Tr. / Ft. / Lic.)" className='mb-3'>
+                  <Form.Control type='text' placeholder='TÍTULO' name='titulo' required onChange={(e) => {changeField(e.target.name, e.target.value)} } value={userRegister.titulo === undefined ? "" : userRegister.titulo} isInvalid={!!validated.titulo}/>
                   <Form.Control.Feedback  type="invalid">
                     {validated.titulo}
                   </Form.Control.Feedback>
@@ -261,7 +258,7 @@ export const FormularioInvestigadores = ({userUpdateRegister, setUserUpdateRegis
             <Form.Check type='checkbox' label='¿ES PRESENTADOR?' name='presentador' required onChange={(e) => {changeField(e.target.name, e.target.checked )} } value={userRegister.presentador === undefined ? "" : userRegister.presentador} /> 
         </Col>
         <Col xs={6} className='d-flex justify-content-end'>
-            <Button onClick={handleGuardarInvestigador} className="btn-custom"><p>Guardar <FontAwesomeIcon icon={faSave} /></p></Button>
+            <Button onClick={hangleAddUser} className="btn-custom"><p>Guardar <FontAwesomeIcon icon={faSave} /></p></Button>
         </Col>
       </Row>
       {validatedLoad !== null ? <Alert className='mt-4' key={validatedLoad.status} variant={validatedLoad.status}>{validatedLoad.msg}</Alert> : ''}

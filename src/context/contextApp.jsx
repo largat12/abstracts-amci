@@ -5,6 +5,7 @@ export const ContextApp = createContext()
 export const ContextAppProvider = ({children}) => {
     const [dataContextApp, setDataContextApp] = useState({"seccionState":1,"seccionTotal":4,"formRegister":{"activeFormFase1": false}, "usersRegister":[]})
     const [userRegisterMain, setUserRegisterMain] = useState({})
+    const [infoTrabajosLibres, setInfoTrabajosLibres] = useState({})
     
     /*guardar el primer usuario*/
     useEffect(() => {
@@ -143,7 +144,7 @@ export const ContextAppProvider = ({children}) => {
 
 
     return(
-        <ContextApp.Provider value={{dataContextApp, setDataContextApp, userRegisterMain, setUserRegisterMain, nextSection, addUsersRegister, removeUserRegister, updateUserRegister, validarPresentador}}>
+        <ContextApp.Provider value={{dataContextApp, setDataContextApp, userRegisterMain, setUserRegisterMain, nextSection, addUsersRegister, removeUserRegister, updateUserRegister, validarPresentador, infoTrabajosLibres, setInfoTrabajosLibres}}>
             {children}
         </ContextApp.Provider>
     )

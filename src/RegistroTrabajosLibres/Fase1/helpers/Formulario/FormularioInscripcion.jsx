@@ -24,7 +24,7 @@ export const FormularioInscripcion = () => {
     const {titulo, genero, nombre, apellido, email, tipoDeIdentificacion, numeroDeIdentificacion, organizacionUniversidad, cargo, direccion, pais, departamento, ciudad, telefonoFijo, telefonoCelular, miembroAMCI} = userRegisterMain
     const newErros = {}
     
-    if(!titulo                  || titulo === ''                      || titulo === undefined) newErros.titulo = 'Titulo obligatorio' 
+    if(!titulo                  || titulo === ''                      || titulo === undefined) newErros.titulo = 'TÍtulo obligatorio' 
     if(!genero                  || genero === ''                      || genero === undefined) newErros.genero = 'Género obligatorio' 
     if(!nombre                  || nombre === ''                      || nombre === undefined) newErros.nombre = 'Nombre (s) obligatorio' 
     if(!apellido                || apellido === ''                    || apellido === undefined) newErros.apellido = 'Apellido (s) obligatorio'
@@ -78,8 +78,8 @@ export const FormularioInscripcion = () => {
     <Form onSubmit={hangleSiguienteFace}>
       <Row>
         <Col xs={12}>
-            <FloatingLabel controlId='floatingTitulo' label="TITULO (Dr. / Enfro. / Tr. / Ft. / Lic.)" className='mb-3'>
-                  <Form.Control type='text' placeholder='TITULO' name='titulo' required onChange={(e) => {changeField(e.target.name, e.target.value)} } value={userRegisterMain.titulo === undefined ? "" : userRegisterMain.titulo} isInvalid={!!validated.titulo}/>
+            <FloatingLabel controlId='floatingTitulo' label="TÍTULO (Dr. / Enfro. / Tr. / Ft. / Lic.)" className='mb-3'>
+                  <Form.Control type='text' placeholder='TÍTULO' name='titulo' required onChange={(e) => {changeField(e.target.name, e.target.value)} } value={userRegisterMain.titulo === undefined ? "" : userRegisterMain.titulo} isInvalid={!!validated.titulo}/>
                   <Form.Control.Feedback  type="invalid">
                     {validated.titulo}
                   </Form.Control.Feedback>
