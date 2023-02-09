@@ -1,15 +1,15 @@
 import React, { useContext, useState } from 'react'
 import { faArrowLeft, faArrowRight } from '@fortawesome/free-solid-svg-icons'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { Container, Row, Col, Button} from 'react-bootstrap'
+import { Container, Row, Col, Button, Alert} from 'react-bootstrap'
 import { FormularioInvestigadores } from './helpers/FormularioInvestigadores'
 import { ContextApp } from '../../context/contextApp'
 import { MapInvestigadores } from './helpers/MapInvestigadores'
 
 export const Fase2 = () => {
-    const {dataContextApp, setDataContextApp} = useContext(ContextApp)
+    const {dataContextApp, setDataContextApp, validarPresentador, nextSection} = useContext(ContextApp)
     const [userUpdateRegister, setUserUpdateRegister] = useState(null)
-
+    const [validatePresentador, setValidatePresentador] = useState(null)
 
     const hangleAtrasPage = () =>{
         setDataContextApp({
@@ -27,6 +27,16 @@ export const Fase2 = () => {
 
     const hangleSiguienteFace = () => {
         
+        let response = validarPresentador()
+        if(!response){
+            setValidatePresentador({"status":"danger","msg":"No hay ningun investigador como presentador"})
+            setInterval(()=>{
+                setValidatePresentador(null)
+            },3000)
+        }
+        else{
+            nextSection()
+        }
     }
 
 
@@ -50,6 +60,7 @@ export const Fase2 = () => {
                         <h5 className='text-center'><strong>LISTA DE INVESTIGADORES</strong></h5>
                         <MapInvestigadores consultarRegisterUser={consultarRegisterUser}/>    
 
+                        {validatePresentador !== null ? <Alert className='mt-4' key={validatePresentador.status} variant={validatePresentador.status}>{validatePresentador.msg}</Alert> : ''}
 
                         <Container fluid className=' p-0'>
                             <Row className='m-0'>

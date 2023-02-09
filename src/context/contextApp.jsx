@@ -21,14 +21,26 @@ export const ContextAppProvider = ({children}) => {
             }
             else{
                 const respuesta = []
-                users.forEach((item) => {
-                    if(item.numeroDeIdentificacion === user.numeroDeIdentificacion){
-                        respuesta.push({...user})
-                    }
-                    else{
-                        respuesta.push({...item})
-                    }
+                users.forEach( (item)=> {
+                    return item.presentador = false
                 })
+                let response = users.some((item) => {
+                    return item.numeroDeIdentificacion === user.numeroDeIdentificacion
+                })
+                if(response){
+                    users.forEach((item) => {
+                        if(item.numeroDeIdentificacion === user.numeroDeIdentificacion){
+                            respuesta.push({...user})
+                        }
+                        else{
+                            respuesta.push({...item})
+                        }
+                    })
+                }
+                else{
+                    respuesta.push({...user}, ...users)
+                }
+            
                 setDataContextApp({
                     ...dataContextApp,
                     usersRegister:respuesta
@@ -87,29 +99,43 @@ export const ContextAppProvider = ({children}) => {
     const updateUserRegister = (userRegister) => {
         let users = [...dataContextApp.usersRegister]
         let user = {...userRegister}
-        const respuesta = []
         /*-------- validar si el usuario viene como presentador --------------*/
+        const respuesta = []
         if(user.presentador){
             users.forEach( (item)=> {
                 return item.presentador = false
             })
         }
-        /*-------- cargar la actualizacion del usuario --------------*/
-        users.forEach((item) => {
-            if(item.numeroDeIdentificacion === user.numeroDeIdentificacion){
-                respuesta.push(user)
-            }
-            else{
-                respuesta.push({...item})
-            }
+        let response = users.some((item) => {
+            return item.numeroDeIdentificacion === user.numeroDeIdentificacion
         })
+        if(response){
+            users.forEach((item) => {
+                if(item.numeroDeIdentificacion === user.numeroDeIdentificacion){
+                    respuesta.push({...user})
+                }
+                else{
+                    respuesta.push({...item})
+                }
+            })
+        }
+        else{
+            respuesta.push({...user}, ...users)
+        }
         setDataContextApp({
             ...dataContextApp,
             usersRegister:respuesta
         })
         return true
     }
-
+    //validar presentador
+    const validarPresentador = () => {
+        let users = [...dataContextApp.usersRegister]
+        let response = users.some((item) => {
+            return item.presentador === true
+        })
+        return response
+    }
 
     
     
@@ -117,7 +143,7 @@ export const ContextAppProvider = ({children}) => {
 
 
     return(
-        <ContextApp.Provider value={{dataContextApp, setDataContextApp, userRegisterMain, setUserRegisterMain, nextSection, addUsersRegister, removeUserRegister, updateUserRegister}}>
+        <ContextApp.Provider value={{dataContextApp, setDataContextApp, userRegisterMain, setUserRegisterMain, nextSection, addUsersRegister, removeUserRegister, updateUserRegister, validarPresentador}}>
             {children}
         </ContextApp.Provider>
     )
