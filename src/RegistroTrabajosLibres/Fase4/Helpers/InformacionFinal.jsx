@@ -50,20 +50,17 @@ export const InformacionFinal = ({dataContextApp, infoTrabajosLibres}) => {
                     <p><strong>Título de la investigación</strong><br/>{infoTrabajosLibres.titulo}</p> 
                     <p><strong>Resumen de la investigación</strong><br/><Markup content={infoTrabajosLibres.resumen}/></p>
                     <p><strong>Relevancia de la investigación</strong><br/><Markup content={infoTrabajosLibres.relevancia}/></p>
-                    <p><strong>Relevancia de la investigación</strong><br/><Markup content={infoTrabajosLibres.relevancia}/></p>  
                     <p><strong>Palabras Clave</strong><br/>{infoTrabajosLibres.palabrasClave1 +", "+ infoTrabajosLibres.palabrasClave2 +", "+ infoTrabajosLibres.palabrasClave3 + (infoTrabajosLibres.palabrasClave4 !== undefined ? ", "+ infoTrabajosLibres.palabrasClave4 :'') + (infoTrabajosLibres.palabrasClave5 !== undefined ? ", "+ infoTrabajosLibres.palabrasClave5 :'') }</p>    
                 </Col>            
             </Row>
             <Row className='form-control p-4 mb-4'>
                 <Col xs={12}>
                     <h5>Investigadores</h5>
-                    <p>
                     {
-                        dataContextApp.usersRegister.map((item) => {
-                            return <>{item.titulo} {item.name} {item.apellido} {item.presentador ? 'PRESENTADOR' : ''}</>
+                        dataContextApp.usersRegister.map((item, index) => {
+                            return <p key={index}>{item.titulo} {item.name} {item.apellido} {item.presentador ? 'PRESENTADOR' : ''}</p>
                         })
                     }
-                    </p>
                 </Col>
             </Row>
         </Container>

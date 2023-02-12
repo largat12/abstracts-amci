@@ -1,12 +1,18 @@
 import { faArrowLeft, faArrowRight } from '@fortawesome/free-solid-svg-icons'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import React, { useContext } from 'react'
+import React, { useContext, useState } from 'react'
 import { Container, Row, Col, Button} from 'react-bootstrap'
 import { ContextApp } from '../../context/contextApp'
+import { subirArchivos } from '../../firebase/helpers/subirArchivos'
+import { subirInvestigacion } from '../../firebase/helpers/subirInvestigacion'
+import { subirUsersInvestigadores } from '../../firebase/helpers/subirUsersInvestigadores'
+import { updateUsersInvestidacion } from '../../firebase/helpers/updateUsersInvestidacion'
 import { InformacionFinal } from './Helpers/InformacionFinal'
 
 export const Fase4 = () => {
   const {dataContextApp, setDataContextApp, infoTrabajosLibres} = useContext(ContextApp)
+  const [textVariable, setTextVariable] = useState('Terminar')
+
 
   const hangleAtrasPage = () =>{
     setDataContextApp({
@@ -15,7 +21,37 @@ export const Fase4 = () => {
     })
   }
   const enviarTrabajoLibre = () => {
-
+    setTextVariable('Enviando...')
+    let urlDocumento = null
+    let response = new Promise( async (resolve, reject)=>{
+      /*--------------------------------------------*/
+      /*---------- subir trabajo libre ------------*/
+      /*--------------------------------------------*/
+      if(infoTrabajosLibres.documento !== null){
+        urlDocumento = await subirArchivos(infoTrabajosLibres.documento).then((response) => {
+          return response
+        })
+      }
+      /*--------------------------------------------*/
+      /*------------ añadir usuarios ---------------*/
+      /*--------------------------------------------*/
+      let idUsers = await subirUsersInvestigadores(dataContextApp.usersRegister)
+      /*--------------------------------------------*/
+      /*------------ subir documento ---------------*/
+      /*--------------------------------------------*/
+      let idInvestigacion = await subirInvestigacion(infoTrabajosLibres, urlDocumento, idUsers)
+      /*--------------------------------------------*/
+      /*--------- subir documento a usuarios -------*/
+      /*--------------------------------------------*/
+      let usersUpdate = await updateUsersInvestidacion(idUsers, idInvestigacion)
+      resolve({idUsers:idUsers,idInvestigacion:idInvestigacion, usersUpdate:usersUpdate})
+    })
+    response.then((response)=>{
+      setDataContextApp({
+        ...dataContextApp,
+        completeRegistro:response
+      })
+    })
   }
   
 
@@ -37,7 +73,7 @@ export const Fase4 = () => {
                       <Button className="btn-custom " onClick={hangleAtrasPage}><p><FontAwesomeIcon icon={ faArrowLeft}/> Anterior</p></Button>
                   </Col>
                   <Col xs={6} className='d-flex justify-content-end  p-0'>
-                      <Button className="btn-custom" onClick={enviarTrabajoLibre}><p>Terminar <FontAwesomeIcon icon={ faArrowRight}/></p></Button>
+                      <Button className="btn-custom" onClick={enviarTrabajoLibre}><p>{textVariable} <FontAwesomeIcon icon={ faArrowRight}/></p></Button>
                   </Col>
                   </Row>
               </Container>

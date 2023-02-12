@@ -16,9 +16,6 @@ export const FormularioTrabajo = ({listCategoryTrabajosLibres}) => {
         if(valueField.length > 250){
             valueField = valueField.slice(0, 250)
         }
-        if(field === 'documento'){
-            console.log("documento", value)
-        }
         setInfoTrabajosLibres({
             ...infoTrabajosLibres,
             [field]: typeof valueField === 'boolean' ? valueField : valueField.toUpperCase()
@@ -31,17 +28,25 @@ export const FormularioTrabajo = ({listCategoryTrabajosLibres}) => {
         }
     }
     const changeFile = (e) =>{
-
-        let file = e.target.files
+        let field = e.target.name
+        let file = e.target.files[0]
         setInfoTrabajosLibres({
             ...infoTrabajosLibres,
-            documento:[...file]
+            documento:file
         })
+        if(!!validated[field]){
+            setValidated({
+            ...validated,
+            [field]:null
+            })
+        }
     }
     const validateForm = () => {
-        const {titulo, categoria, relevancia, publicacion} = infoTrabajosLibres
+        const {titulo, categoria, relevancia, publicacion, documento} = infoTrabajosLibres
         const {palabrasClave1, palabrasClave2, palabrasClave3} = infoTrabajosLibres
         const newErros = {}
+
+        const extFile = /(.jpg|.JPG|.jpeg|.JPEG|.png|.PNG|.pdf|.PDF|.pptx|.PPTX|.docx|.DOCX)$/i;
         
         if(!categoria                  || categoria === ''                      || categoria === undefined) newErros.categoria = 'Categoría de la investigación obligatorio'
         if(!titulo                     || titulo === ''                         || titulo === undefined) newErros.titulo = 'Título de la investigación obligatorio'
@@ -50,6 +55,14 @@ export const FormularioTrabajo = ({listCategoryTrabajosLibres}) => {
         if(!palabrasClave2             || palabrasClave2 === ''                 || palabrasClave2 === undefined) newErros.palabrasClave2 = 'Palabra clave de la investigación obligatorio'
         if(!palabrasClave3             || palabrasClave3 === ''                 || palabrasClave3 === undefined) newErros.palabrasClave3 = 'Palabra clave de la investigación obligatorio'
         if(!publicacion                || publicacion === ''                    || publicacion === undefined) newErros.publicacion = 'Publicacion de la investigación obligatorio'
+        if(documento !== undefined && documento !== null){
+            if(documento.size > 500000){
+                newErros.documento = 'El tamaño permitido es de 500kb'
+            }
+            else if(!extFile.exec(documento.name)){
+                newErros.documento = 'Los formatos permitidos son jpg, jpeg, png, pdf, pptx, docx'
+            }
+        } 
 
         return newErros
     }
@@ -83,6 +96,12 @@ export const FormularioTrabajo = ({listCategoryTrabajosLibres}) => {
         })
     }
     const hangleSiguienteFace = (e) => {
+        if(infoTrabajosLibres.documento === undefined){
+            setInfoTrabajosLibres({
+                ...infoTrabajosLibres,
+                documento:null
+            })
+        }
         e.preventDefault()
         const formErrors = validateForm();
         if(Object.keys(formErrors).length > 0){
@@ -192,10 +211,12 @@ export const FormularioTrabajo = ({listCategoryTrabajosLibres}) => {
             </Row>
             <Row className='form-control p-4 mb-4'>
                 <Col xs={12}>
-                    <h6 className="text-left"><strong>Adjuntar de la investigación</strong></h6>
+                    <h6 className="text-left"><strong>Adjuntar la investigación</strong></h6>
                 </Col>
-                <Form.Control type="file"  name='documento' onChange={changeFile} ></Form.Control>
-                   
+                <Form.Control type="file"  name='documento' onChange={changeFile} isInvalid={!!validated.documento}></Form.Control>
+                <Form.Control.Feedback  type="invalid">
+                        {validated.documento}
+                    </Form.Control.Feedback>
             </Row>
             <Row className='form-control p-4 mb-4'>
                 <Col xs={12}>
@@ -228,7 +249,7 @@ export const FormularioTrabajo = ({listCategoryTrabajosLibres}) => {
                 
             </Row>
             <Row className='p-4 mb-4'>
-                <h6 className="text-left"><strong>En caso de que el resumen sea seleccionado para el evento, autorizo que se publique en las en la revista de AMCI:   </strong></h6>
+                <h6 className="text-left"><strong>En caso de que el resumen sea seleccionado para el evento, autorizo que se publique en la revista de AMCI:   </strong></h6>
                 <Form.Select size="sm" name='publicacion' placeholder='Publicación de la investigación' required onChange={(e) => {changeField(e.target.name, e.target.value)} } value={infoTrabajosLibres.publicacion === undefined ? "" : infoTrabajosLibres.publicacion}  isInvalid={!!validated.publicacion}>
                     <option value=''>SELECCIONE</option>
                     <option value='SI'>SI</option>

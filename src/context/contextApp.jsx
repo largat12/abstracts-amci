@@ -3,7 +3,8 @@ import { createContext, useEffect, useState } from "react";
 export const ContextApp = createContext()
 
 export const ContextAppProvider = ({children}) => {
-    const [dataContextApp, setDataContextApp] = useState({"seccionState":1,"seccionTotal":4,"formRegister":{"activeFormFase1": false}, "usersRegister":[]})
+    const estructuraDataContextApp = {"seccionState":1,"seccionTotal":4,"formRegister":{"activeFormFase1": false}, "usersRegister":[], 'completeRegistro':null}
+    const [dataContextApp, setDataContextApp] = useState(estructuraDataContextApp)
     const [userRegisterMain, setUserRegisterMain] = useState({})
     const [infoTrabajosLibres, setInfoTrabajosLibres] = useState({})
     
@@ -137,6 +138,12 @@ export const ContextAppProvider = ({children}) => {
         })
         return response
     }
+    //limpiar contextos
+    const clearContext = () => {
+        setDataContextApp(estructuraDataContextApp)
+        setUserRegisterMain({})
+        setInfoTrabajosLibres({})
+    }
 
     
     
@@ -144,7 +151,7 @@ export const ContextAppProvider = ({children}) => {
 
 
     return(
-        <ContextApp.Provider value={{dataContextApp, setDataContextApp, userRegisterMain, setUserRegisterMain, nextSection, addUsersRegister, removeUserRegister, updateUserRegister, validarPresentador, infoTrabajosLibres, setInfoTrabajosLibres}}>
+        <ContextApp.Provider value={{dataContextApp, setDataContextApp, userRegisterMain, setUserRegisterMain, nextSection, addUsersRegister, removeUserRegister, updateUserRegister, validarPresentador, infoTrabajosLibres, setInfoTrabajosLibres, clearContext}}>
             {children}
         </ContextApp.Provider>
     )
