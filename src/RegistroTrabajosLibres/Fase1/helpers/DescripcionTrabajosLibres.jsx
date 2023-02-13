@@ -37,6 +37,8 @@ export const DescripcionTrabajosLibres = () => {
               <li>Por lo menos uno de los autores del resumen sometido debe ser miembro de la AMCI para poder presentar en el congreso.</li>
               <li>En caso de que el autor presentador del resumen inscrito en el sistema cambie, debe notificarlo con tiempo a la organización, de lo contario no se tendrá en cuenta el trabajo para ser presentado en el congreso.</li>
               <li>Cada resumen podrá participar en un eje temático, usted podrá seleccionar el que considere más afín a la temática de la investigación entre los siguientes
+                
+                
                 <ol>
                   <li><strong>Adultos – Respiratorio:</strong> diagnóstico, monitoreo, soporte y terapéutica, oxigenoterapia, ventilación mecánica.</li>
                   <li><strong>Adultos – Cardiovascular:</strong> diagnóstico, monitoreo, soporte, terapéutica, perfusión, asistencia circulatoria mecánica.</li>
@@ -47,6 +49,7 @@ export const DescripcionTrabajosLibres = () => {
                   <li><strong>Cuidado Crítico Pediátrico</strong></li>
                   <li><strong>Enfermería</strong></li>
                   <li><strong>Terapia</strong></li>
+                  <li><strong>Trabajos de grado de especialización de medicina crítica</strong> (aplica para todos los profesionales de la salud: medicina, enfermería y terapia.  Debe tener una vigencia de los dos últimos años previos al congreso).</li>
                 </ol>
               </li>
           </ul>
