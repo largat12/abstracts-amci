@@ -11,6 +11,7 @@ export const subirInvestigacion = async (investigacion, documento, idUsers) => {
         palabrasClaves.push(investigacion.palabrasClave5)
     }
     let newInvestigacion = {
+        date: new Date(),
         categoria: investigacion.categoria,
         titulo: investigacion.titulo,
         resumen: investigacion.resumen,
