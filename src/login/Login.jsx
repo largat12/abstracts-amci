@@ -10,7 +10,7 @@ export const Login = () => {
 
   const {userLogin} = useContext(ContextAppAdministracion)
 
-  if(userLogin !== null){
+  if(userLogin !== null && userLogin !== '{}'){
     return <Navigate to='/administracion' />
   }
 
