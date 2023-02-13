@@ -19,9 +19,9 @@ export const DescripcionTrabajosLibres = () => {
 
   return (
     <>
-      <h1 className='text-center' style={{color:"var(--bg-primary)"}}>CONVOCATORIA DE RESÚMENES <br />HABILITADA HASTA  EL 1 DE ABRIL DE 2023</h1>
+      <h1 className='text-center' style={{color:"var(--bg-primary)"}}>CONVOCATORIA DE RESÚMENES <br />HABILITADA HASTA EL 31 DE MARZO DE 2023</h1>
       <div className='description-formulario-registro'>
-          <p>Bienvenido al sistema en línea para la convocatoria de trabajos libres del Congreso Nacional AMCI 2023 que se realizará del 17 de febrero al 1 de abril de 2023 de forma virtual. <br/>
+          <p>Bienvenido al sistema en línea para la convocatoria de trabajos libres del Congreso Nacional AMCI 2023 que se realizará del 18 de febrero al 31 de marzo de 2023 de forma virtual. <br/>
           Este sistema consta de cuatro secciones:</p>
           <ul>
               <li><strong>Sección 1:</strong> Información del autor de contacto.</li>
@@ -53,7 +53,7 @@ export const DescripcionTrabajosLibres = () => {
                 </ol>
               </li>
           </ul>
-          <p>Para solucionar cualquier duda o si requiere información adicional comuníquese con el Comité Organizador del congreso a través del correo electrónico <a href="mailto:abstract@amci.org.co" target="_blank" rel="noreferrer">abstract@amci.org.co</a></p>
+          <p>Para solucionar cualquier duda o si requiere información adicional comuníquese con el Comité Organizador del congreso a través del correo electrónico <a href="mailto:administracion@amci.org.co" target="_blank" rel="noreferrer">administracion@amci.org.co</a></p>
           <Container fluid className=' p-0'>
             <Row className='m-0'>
               <Col xs={12} className='d-flex justify-content-end  p-0'>
