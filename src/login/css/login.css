@@ -1,0 +1,23 @@
+.form-login {
+    max-width: 500px;
+    padding: 20px;
+    box-shadow: 0 30px 100px rgb(0 0 0 / 17%);
+    background: white;
+    margin: 20px auto;
+    /* border-radius: 16px; */
+}
+.container-login {
+    height: 100vh;
+}
+
+.container-login > .row > div {
+    display: flex;
+    height: 100vh;
+    justify-content: center;
+    align-items: center;
+}
+
+.container-login .logoAMCI {
+    width: 100%;
+    max-width: 300px;
+}

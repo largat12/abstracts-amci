@@ -3,25 +3,25 @@ import { faArrowLeft, faArrowRight } from '@fortawesome/free-solid-svg-icons'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { Container, Row, Col, Button, Alert} from 'react-bootstrap'
 import { FormularioInvestigadores } from './helpers/FormularioInvestigadores'
-import { ContextApp } from '../../context/contextApp'
+import { ContextAppInvesitaciones } from '../../context/ContextAppInvesitaciones'
 import { MapInvestigadores } from './helpers/MapInvestigadores'
 
 export const Fase2 = () => {
-    const {dataContextApp, setDataContextApp, validarPresentador, nextSection} = useContext(ContextApp)
+    const {dataContextAppInvesitaciones, setDataContextAppInvesitaciones, validarPresentador, nextSection} = useContext(ContextAppInvesitaciones)
     const [userUpdateRegister, setUserUpdateRegister] = useState(null)
     const [validatePresentador, setValidatePresentador] = useState(null)
 
     
 
     const hangleAtrasPage = () =>{
-        setDataContextApp({
-          ...dataContextApp,
+        setDataContextAppInvesitaciones({
+          ...dataContextAppInvesitaciones,
           seccionState: 1
         })
     }
 
     const consultarRegisterUser = (idUser) => {
-        let users = [...dataContextApp.usersRegister]
+        let users = [...dataContextAppInvesitaciones.usersRegister]
         let user = users.find(item => item.numeroDeIdentificacion === idUser)
         setUserUpdateRegister(user)
         

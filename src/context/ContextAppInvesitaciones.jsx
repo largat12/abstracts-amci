@@ -1,23 +1,23 @@
 import { createContext, useEffect, useState } from "react";
 
-export const ContextApp = createContext()
+export const ContextAppInvesitaciones = createContext()
 
-export const ContextAppProvider = ({children}) => {
-    const estructuraDataContextApp = {"seccionState":1,"seccionTotal":4,"formRegister":{"activeFormFase1": false}, "usersRegister":[], 'completeRegistro':null}
-    const [dataContextApp, setDataContextApp] = useState(estructuraDataContextApp)
+export const ContextAppInvesitacionesProvider = ({children}) => {
+    const estructuraDataContextAppInvesitaciones = {"seccionState":1,"seccionTotal":4,"formRegister":{"activeFormFase1": false}, "usersRegister":[], 'completeRegistro':null}
+    const [dataContextAppInvesitaciones, setDataContextAppInvesitaciones] = useState(estructuraDataContextAppInvesitaciones)
     const [userRegisterMain, setUserRegisterMain] = useState({})
     const [infoTrabajosLibres, setInfoTrabajosLibres] = useState({})
     
     /*guardar el primer usuario*/
     useEffect(() => {
         //cargar primer usuario que registra el trabajo
-        if(dataContextApp.seccionState === 2){
-            let users = [...dataContextApp.usersRegister]
+        if(dataContextAppInvesitaciones.seccionState === 2){
+            let users = [...dataContextAppInvesitaciones.usersRegister]
             let user = {...userRegisterMain}
             if(users.length === 0){
                 users.push(user)
-                setDataContextApp({
-                    ...dataContextApp,
+                setDataContextAppInvesitaciones({
+                    ...dataContextAppInvesitaciones,
                     usersRegister:users
                 })
             }
@@ -43,19 +43,19 @@ export const ContextAppProvider = ({children}) => {
                     respuesta.push({...user}, ...users)
                 }
             
-                setDataContextApp({
-                    ...dataContextApp,
+                setDataContextAppInvesitaciones({
+                    ...dataContextAppInvesitaciones,
                     usersRegister:respuesta
                 })
             }
             
         }
-    }, [dataContextApp.seccionState])
+    }, [dataContextAppInvesitaciones.seccionState])
     //incrementar seccion
     const nextSection = ()=>{
-        let seccionActual = {...dataContextApp}
-        setDataContextApp({
-            ...dataContextApp,
+        let seccionActual = {...dataContextAppInvesitaciones}
+        setDataContextAppInvesitaciones({
+            ...dataContextAppInvesitaciones,
             seccionState:seccionActual.seccionState + 1 > 4 ? seccionActual.seccionState : seccionActual.seccionState + 1  
         })
     }
@@ -64,7 +64,7 @@ export const ContextAppProvider = ({children}) => {
     /*------------------------------------------------------*/
     //agregar investigadores despues del autor
     const addUsersRegister = (userRegister) => {
-        let users = [...dataContextApp.usersRegister]
+        let users = [...dataContextAppInvesitaciones.usersRegister]
         let user = {...userRegister}
         if(user.presentador){
             users.forEach( (item)=> {
@@ -78,8 +78,8 @@ export const ContextAppProvider = ({children}) => {
             return false
         }
         else{
-            setDataContextApp({
-                ...dataContextApp,
+            setDataContextAppInvesitaciones({
+                ...dataContextAppInvesitaciones,
                 usersRegister:[...users,user]
             })
             return true
@@ -87,19 +87,19 @@ export const ContextAppProvider = ({children}) => {
     }
     //remover investigador
     const removeUserRegister = (id) => {
-        let users = [...dataContextApp.usersRegister] 
+        let users = [...dataContextAppInvesitaciones.usersRegister] 
         let result = users.filter((user) => {
             return user.numeroDeIdentificacion !== id
         })
-        setDataContextApp({
-            ...dataContextApp,
+        setDataContextAppInvesitaciones({
+            ...dataContextAppInvesitaciones,
             usersRegister:result
         })
 
     }
     //editar investigador
     const updateUserRegister = (userRegister) => {
-        let users = [...dataContextApp.usersRegister]
+        let users = [...dataContextAppInvesitaciones.usersRegister]
         let user = {...userRegister}
         /*-------- validar si el usuario viene como presentador --------------*/
         const respuesta = []
@@ -124,15 +124,15 @@ export const ContextAppProvider = ({children}) => {
         else{
             respuesta.push({...user}, ...users)
         }
-        setDataContextApp({
-            ...dataContextApp,
+        setDataContextAppInvesitaciones({
+            ...dataContextAppInvesitaciones,
             usersRegister:respuesta
         })
         return true
     }
     //validar presentador
     const validarPresentador = () => {
-        let users = [...dataContextApp.usersRegister]
+        let users = [...dataContextAppInvesitaciones.usersRegister]
         let response = users.some((item) => {
             return item.presentador === true
         })
@@ -140,19 +140,15 @@ export const ContextAppProvider = ({children}) => {
     }
     //limpiar contextos
     const clearContext = () => {
-        setDataContextApp(estructuraDataContextApp)
+        setDataContextAppInvesitaciones(estructuraDataContextAppInvesitaciones)
         setUserRegisterMain({})
         setInfoTrabajosLibres({})
     }
 
-    
-    
-
-
 
     return(
-        <ContextApp.Provider value={{dataContextApp, setDataContextApp, userRegisterMain, setUserRegisterMain, nextSection, addUsersRegister, removeUserRegister, updateUserRegister, validarPresentador, infoTrabajosLibres, setInfoTrabajosLibres, clearContext}}>
+        <ContextAppInvesitaciones.Provider value={{dataContextAppInvesitaciones, setDataContextAppInvesitaciones, userRegisterMain, setUserRegisterMain, nextSection, addUsersRegister, removeUserRegister, updateUserRegister, validarPresentador, infoTrabajosLibres, setInfoTrabajosLibres, clearContext}}>
             {children}
-        </ContextApp.Provider>
+        </ContextAppInvesitaciones.Provider>
     )
 }

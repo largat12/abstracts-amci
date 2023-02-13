@@ -2,17 +2,17 @@ import { faArrowRight } from '@fortawesome/free-solid-svg-icons'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import React, { useContext } from 'react'
 import { Button, Col, Container, Row } from 'react-bootstrap'
-import { ContextApp } from '../../../context/contextApp'
+import { ContextAppInvesitaciones } from '../../../context/ContextAppInvesitaciones'
 
 export const DescripcionTrabajosLibres = () => {
-  const {dataContextApp, setDataContextApp} = useContext(ContextApp)
+  const {dataContextAppInvesitaciones, setDataContextAppInvesitaciones} = useContext(ContextAppInvesitaciones)
 
 
   const hangleDescriptionTrabajosLibres = (e) => {
     e.preventDefault();
-    let data = {...dataContextApp}
+    let data = {...dataContextAppInvesitaciones}
     data.formRegister.activeFormFase1 = true
-    setDataContextApp({
+    setDataContextAppInvesitaciones({
       ...data
     })
   }

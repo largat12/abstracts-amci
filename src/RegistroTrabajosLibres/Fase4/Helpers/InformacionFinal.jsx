@@ -2,16 +2,16 @@ import { Markup } from 'interweave'
 import React, { useEffect, useState } from 'react'
 import { Col, Container, Row } from 'react-bootstrap'
 
-export const InformacionFinal = ({dataContextApp, infoTrabajosLibres}) => {
+export const InformacionFinal = ({dataContextAppInvesitaciones, infoTrabajosLibres}) => {
 
     const [usuarioContacto, setUsuarioContacto] = useState(null)
     useEffect(() => {
-      let users = [...dataContextApp.usersRegister]
+      let users = [...dataContextAppInvesitaciones.usersRegister]
       let user = users.find((item) => {
         return item.presentador === true
       })
       setUsuarioContacto(user)
-    }, [dataContextApp])
+    }, [dataContextAppInvesitaciones])
     
 
     return (
@@ -57,7 +57,7 @@ export const InformacionFinal = ({dataContextApp, infoTrabajosLibres}) => {
                 <Col xs={12}>
                     <h5>Investigadores</h5>
                     {
-                        dataContextApp.usersRegister.map((item, index) => {
+                        dataContextAppInvesitaciones.usersRegister.map((item, index) => {
                             return <p key={index}>{item.titulo} {item.name} {item.apellido} {item.presentador ? 'PRESENTADOR' : ''}</p>
                         })
                     }

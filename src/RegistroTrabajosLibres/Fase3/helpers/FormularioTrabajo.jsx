@@ -2,11 +2,11 @@ import { faArrowLeft, faArrowRight } from '@fortawesome/free-solid-svg-icons'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { Editor } from '@tinymce/tinymce-react'
 import React, { useContext, useState} from 'react'
-import { ContextApp } from '../../../context/contextApp'
+import { ContextAppInvesitaciones } from '../../../context/ContextAppInvesitaciones'
 import { Button, Col, Container, FloatingLabel, Form, Row } from 'react-bootstrap'
 
 export const FormularioTrabajo = ({listCategoryTrabajosLibres}) => {
-    const {dataContextApp, setDataContextApp, nextSection, infoTrabajosLibres, setInfoTrabajosLibres} = useContext(ContextApp)
+    const {dataContextAppInvesitaciones, setDataContextAppInvesitaciones, nextSection, infoTrabajosLibres, setInfoTrabajosLibres} = useContext(ContextAppInvesitaciones)
     const [validated, setValidated] = useState(false)
     const [countEditor, setCountEditor] = useState(0);
     const sizeLimit = 2500;
@@ -90,8 +90,8 @@ export const FormularioTrabajo = ({listCategoryTrabajosLibres}) => {
           }
     }
     const hangleAtrasPage = () =>{
-        setDataContextApp({
-        ...dataContextApp,
+        setDataContextAppInvesitaciones({
+        ...dataContextAppInvesitaciones,
         seccionState: 2
         })
     }

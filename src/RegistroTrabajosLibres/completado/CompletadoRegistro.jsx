@@ -1,10 +1,10 @@
-import React, { useContext, useEffect } from 'react'
+import React, { useContext } from 'react'
 import { Button, Col, Container, Row } from 'react-bootstrap'
 import { useNavigate } from 'react-router-dom'
-import { ContextApp } from '../../context/contextApp'
+import { ContextAppInvesitaciones } from '../../context/ContextAppInvesitaciones'
 
 export const CompletadoRegistro = () => {
-  const {clearContext} = useContext(ContextApp)
+  const {clearContext} = useContext(ContextAppInvesitaciones)
   const navigate = useNavigate()
   
   const handleFinalizarRegistro = (e) => {

@@ -32,6 +32,15 @@ body {
   -moz-osx-font-smoothing: grayscale;
 }
 
+.justify-center {
+  justify-content: center;
+}
+
+.align-center {
+  align-items: center;
+  align-content: center;
+}
+
 h1 {
   font-size: 2rem;
 }

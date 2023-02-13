@@ -2,10 +2,10 @@ import { faArrowLeft, faArrowRight } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import React, { useContext, useState } from 'react'
 import { Button, Col, Container, FloatingLabel, Form, Row } from 'react-bootstrap'
-import { ContextApp } from '../../../../context/contextApp';
+import { ContextAppInvesitaciones } from '../../../../context/ContextAppInvesitaciones';
 
 export const FormularioInscripcion = () => {
-  const {dataContextApp, setDataContextApp, nextSection, userRegisterMain, setUserRegisterMain} = useContext(ContextApp)
+  const {dataContextAppInvesitaciones, setDataContextAppInvesitaciones, nextSection, userRegisterMain, setUserRegisterMain} = useContext(ContextAppInvesitaciones)
   const [validated, setValidated] = useState(false);
 
   const changeField = (field, value) => {
@@ -51,9 +51,9 @@ export const FormularioInscripcion = () => {
   }
   const hangleAtrasPage = (e) => {
     e.preventDefault();
-    let data = {...dataContextApp}
+    let data = {...dataContextAppInvesitaciones}
     data.formRegister.activeFormFase1 = false
-    setDataContextApp({
+    setDataContextAppInvesitaciones({
       ...data
     })
   }

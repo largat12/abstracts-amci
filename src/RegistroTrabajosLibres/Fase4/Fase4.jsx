@@ -2,7 +2,7 @@ import { faArrowLeft, faArrowRight } from '@fortawesome/free-solid-svg-icons'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import React, { useContext, useState } from 'react'
 import { Container, Row, Col, Button} from 'react-bootstrap'
-import { ContextApp } from '../../context/contextApp'
+import { ContextAppInvesitaciones } from '../../context/ContextAppInvesitaciones'
 import { subirArchivos } from '../../firebase/helpers/subirArchivos'
 import { subirInvestigacion } from '../../firebase/helpers/subirInvestigacion'
 import { subirUsersInvestigadores } from '../../firebase/helpers/subirUsersInvestigadores'
@@ -10,13 +10,13 @@ import { updateUsersInvestidacion } from '../../firebase/helpers/updateUsersInve
 import { InformacionFinal } from './Helpers/InformacionFinal'
 
 export const Fase4 = () => {
-  const {dataContextApp, setDataContextApp, infoTrabajosLibres} = useContext(ContextApp)
+  const {dataContextAppInvesitaciones, setDataContextAppInvesitaciones, infoTrabajosLibres} = useContext(ContextAppInvesitaciones)
   const [textVariable, setTextVariable] = useState('Terminar')
 
 
   const hangleAtrasPage = () =>{
-    setDataContextApp({
-      ...dataContextApp,
+    setDataContextAppInvesitaciones({
+      ...dataContextAppInvesitaciones,
       seccionState: 3
     })
   }
@@ -35,7 +35,7 @@ export const Fase4 = () => {
       /*--------------------------------------------*/
       /*------------ añadir usuarios ---------------*/
       /*--------------------------------------------*/
-      let idUsers = await subirUsersInvestigadores(dataContextApp.usersRegister)
+      let idUsers = await subirUsersInvestigadores(dataContextAppInvesitaciones.usersRegister)
       /*--------------------------------------------*/
       /*------------ subir documento ---------------*/
       /*--------------------------------------------*/
@@ -47,8 +47,8 @@ export const Fase4 = () => {
       resolve({idUsers:idUsers,idInvestigacion:idInvestigacion, usersUpdate:usersUpdate})
     })
     response.then((response)=>{
-      setDataContextApp({
-        ...dataContextApp,
+      setDataContextAppInvesitaciones({
+        ...dataContextAppInvesitaciones,
         completeRegistro:response
       })
     })
@@ -66,7 +66,7 @@ export const Fase4 = () => {
                       <li>Haciendo clic en el botón <strong>TERMINAR</strong> en la parte inferior derecha de esta página, usted confirmará el registro de su resumen de trabajo libre. Recibirá en la confirmación de registro una copia de este resumen vía correo electrónico.</li>
                   </ul>
                 </div> 
-                <InformacionFinal dataContextApp={dataContextApp} infoTrabajosLibres={infoTrabajosLibres}/>   
+                <InformacionFinal dataContextAppInvesitaciones={dataContextAppInvesitaciones} infoTrabajosLibres={infoTrabajosLibres}/>   
                 <Container fluid className=' p-0'>
                   <Row className='m-0'>
                   <Col xs={6} className='d-flex justify-content-start p-0'>

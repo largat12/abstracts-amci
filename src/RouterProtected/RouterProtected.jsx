@@ -1,10 +1,13 @@
 
+import { useContext } from "react";
 import { Navigate } from "react-router-dom"
+import { ContextAppAdministracion } from "../context/ContextAppAdministracion";
 
 
-export const RouterProtected = ({user, children}) => {
+export const RouterProtected = ({children}) => {
+    const {userLogin} = useContext(ContextAppAdministracion)
 
-    if(user === ""){
+    if(userLogin === null){
         return <Navigate to="/" />
     }
 

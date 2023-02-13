@@ -3,11 +3,11 @@ import { faSave } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import React, { useContext, useEffect, useState } from 'react'
 import { Alert, Button, Col, FloatingLabel, Form, Row } from 'react-bootstrap'
-import { ContextApp } from '../../../context/contextApp';
+import { ContextAppInvesitaciones } from '../../../context/ContextAppInvesitaciones';
 
 export const FormularioInvestigadores = ({userUpdateRegister, setUserUpdateRegister}) => { 
   
-  const {addUsersRegister, updateUserRegister} = useContext(ContextApp)
+  const {addUsersRegister, updateUserRegister} = useContext(ContextAppInvesitaciones)
   const [userRegister, setUserRegister] = useState({})
   const [validated, setValidated] = useState(false);
   const [validatedLoad, setValidatedLoad] = useState(null);
