@@ -2,7 +2,19 @@
 import { initializeApp } from "firebase/app";
 import { getFirestore} from "firebase/firestore";
 import { getStorage } from 'firebase/storage'
-// Your web app's Firebase configuration
+// PREPRODUCCION
+
+/*const firebaseConfig = {
+  apiKey: "AIzaSyA1fCcaIhditmM9E7rldWDYSE8W0a5GCNQ",
+  authDomain: "pruebas-amci.firebaseapp.com",
+  projectId: "pruebas-amci",
+  storageBucket: "pruebas-amci.appspot.com",
+  messagingSenderId: "863467531242",
+  appId: "1:863467531242:web:0ad23efab983e17f5de093"
+};*/
+
+
+// PRODUCCION
 const firebaseConfig = {
     apiKey: "AIzaSyDAwA9acjXWGImGVoxOqTD9HoiIBmvEqfg",
     authDomain: "abstracts-amci.firebaseapp.com",
