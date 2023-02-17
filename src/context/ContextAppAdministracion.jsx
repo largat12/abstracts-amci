@@ -1,15 +1,32 @@
-import { createContext, useEffect, useState } from "react";
+import { createContext, useState } from "react";
+import { useNavigate } from "react-router-dom";
 
 export const ContextAppAdministracion = createContext()
 export const ContextAppAdministracionProvider = ({children}) => {
+    const valSessionStorage = JSON.parse( sessionStorage.getItem('userLogin') )
+    const [userLogin, setUserLogin,] = useState(sessionStorage.getItem('userLogin') === null || sessionStorage.getItem('userLogin') === '{}' ? null :  {...valSessionStorage[0]} )
+    const [pageDashboard, setPageDashboard] = useState({page:'investigaciones'})
+    const navigate = useNavigate() 
 
-    const [userLogin, setUserLogin] = useState(sessionStorage.getItem('userLogin') === null || sessionStorage.getItem('userLogin') === '{}' ? null : JSON.parse( sessionStorage.getItem('userLogin') ))
-    
-    useEffect(()=>{
-        sessionStorage.setItem('userLogin',JSON.stringify( {...userLogin} ) )
-    },[userLogin])
 
-    return  <ContextAppAdministracion.Provider value={{userLogin, setUserLogin}}>
+    const iniciarSesionFun = (response) => {
+        setUserLogin({...response})
+        sessionStorage.setItem('userLogin',JSON.stringify( {...response} ) )
+        navigate('/administracion')
+    }
+
+    const cerrarSesionFun = () => {
+        sessionStorage.setItem('userLogin','{}') 
+        setUserLogin('{}')
+        navigate("/")
+    }
+
+    const cambioDashboard = (page) => {
+        setPageDashboard({page})
+    }
+
+
+    return  <ContextAppAdministracion.Provider value={{userLogin, setUserLogin, pageDashboard, cambioDashboard, iniciarSesionFun, cerrarSesionFun}}>
                 {children}
             </ContextAppAdministracion.Provider>
 }

@@ -1,4 +1,4 @@
-import { createContext, useEffect, useState } from "react";
+import { createContext, useState } from "react";
 
 export const ContextAppInvesitaciones = createContext()
 
@@ -7,56 +7,11 @@ export const ContextAppInvesitacionesProvider = ({children}) => {
     const [dataContextAppInvesitaciones, setDataContextAppInvesitaciones] = useState(estructuraDataContextAppInvesitaciones)
     const [userRegisterMain, setUserRegisterMain] = useState({})
     const [infoTrabajosLibres, setInfoTrabajosLibres] = useState({})
-    
-    /*guardar el primer usuario*/
-    useEffect(() => {
-        //cargar primer usuario que registra el trabajo
-        if(dataContextAppInvesitaciones.seccionState === 2){
-            let users = [...dataContextAppInvesitaciones.usersRegister]
-            let user = {...userRegisterMain}
-            if(users.length === 0){
-                users.push(user)
-                setDataContextAppInvesitaciones({
-                    ...dataContextAppInvesitaciones,
-                    usersRegister:users
-                })
-            }
-            else{
-                const respuesta = []
-                users.forEach( (item)=> {
-                    return item.presentador = false
-                })
-                let response = users.some((item) => {
-                    return item.numeroDeIdentificacion === user.numeroDeIdentificacion
-                })
-                if(response){
-                    users.forEach((item) => {
-                        if(item.numeroDeIdentificacion === user.numeroDeIdentificacion){
-                            respuesta.push({...user})
-                        }
-                        else{
-                            respuesta.push({...item})
-                        }
-                    })
-                }
-                else{
-                    respuesta.push({...user}, ...users)
-                }
-            
-                setDataContextAppInvesitaciones({
-                    ...dataContextAppInvesitaciones,
-                    usersRegister:respuesta
-                })
-            }
-            
-        }
-    }, [dataContextAppInvesitaciones.seccionState])
     //incrementar seccion
     const nextSection = ()=>{
-        let seccionActual = {...dataContextAppInvesitaciones}
         setDataContextAppInvesitaciones({
             ...dataContextAppInvesitaciones,
-            seccionState:seccionActual.seccionState + 1 > 4 ? seccionActual.seccionState : seccionActual.seccionState + 1  
+            seccionState:dataContextAppInvesitaciones.seccionState + 1 > 4 ? dataContextAppInvesitaciones.seccionState : dataContextAppInvesitaciones.seccionState + 1  
         })
     }
     /*------------------------------------------------------*/

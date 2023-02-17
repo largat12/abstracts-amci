@@ -1,0 +1,51 @@
+.slidebar{
+    background: var(--bg-primary);
+    height: 100vh;
+    display: flex;
+    align-items: stretch;
+    align-content: space-around;
+}
+.slidebar > .row {
+    height: 100%;
+}
+
+.slidebar .content-slider {
+    display: flex;
+    height: 100%;
+    flex-direction: column;
+    justify-content: space-between;
+}
+.slidebar .menu .title-name {
+    color: white;
+    font-size: 1rem;
+    padding: 15px 10px;
+    border-top: 1px solid white;
+    border-bottom: 1px solid white;
+    background: #2b244e;
+}
+.slidebar .menu .title-menu {
+    color: white;
+    font-size: 1.2rem;
+    padding: 12px;
+}
+
+.slidebar .menu .nav .nav-item {
+    border-bottom: 1px solid #655c93;
+}
+
+.slidebar .menu .nav .nav-item a {
+    color: white;
+    font-weight: 100;
+}
+
+.slidebar .menu .nav .nav-item:last-child {
+    border: none;
+}
+.slidebar .menu .nav .nav-item a:hover{
+    background: #2b2350;
+}
+.slidebar .menu .nav .nav-item a.active {
+    color: var(--bg-primary);
+    background: white;
+    font-weight: 500;
+}

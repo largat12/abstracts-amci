@@ -1,7 +1,7 @@
 import { addDoc, collection } from "firebase/firestore"
 import { dbApp } from "../configFirebase"
 
-export const subirInvestigacion = async (investigacion, documento, idUsers) => {
+export const subirInvestigacion = async (investigacion, documento, idUsers, status) => {
     
     let palabrasClaves = [investigacion.palabrasClave1, investigacion.palabrasClave2, investigacion.palabrasClave3]
     if(investigacion.palabrasClave4 !== undefined && investigacion.palabrasClave4 !== ''){
@@ -19,7 +19,11 @@ export const subirInvestigacion = async (investigacion, documento, idUsers) => {
         palabrasClaves:palabrasClaves,
         publicacion: investigacion.publicacion,
         documento: documento,
-        users:idUsers
+        users:idUsers,
+        status:status,
+        totalPuntuacion:0,
+        descripcionPuntajes:[],
+        jurados:[]
     }
     const collectionRef = collection(dbApp, 'trabajos-libres/abstracts/abstracts')
     let response = await addDoc(collectionRef, newInvestigacion)
