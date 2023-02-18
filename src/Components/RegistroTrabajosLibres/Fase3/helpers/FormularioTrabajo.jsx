@@ -13,7 +13,7 @@ export const FormularioTrabajo = ({listCategoryTrabajosLibres}) => {
 
     const changeField = (field, value) => {
         let valueField = value
-        if(valueField.length > 250){
+        if(valueField.length > 250 && field === 'titulo'){
             valueField = valueField.slice(0, 250)
         }
         setInfoTrabajosLibres({
@@ -27,7 +27,7 @@ export const FormularioTrabajo = ({listCategoryTrabajosLibres}) => {
             })
         }
     }
-    const changeFile = (e) =>{
+    /*const changeFile = (e) =>{
         let field = e.target.name
         let file = e.target.files[0]
         setInfoTrabajosLibres({
@@ -40,13 +40,13 @@ export const FormularioTrabajo = ({listCategoryTrabajosLibres}) => {
             [field]:null
             })
         }
-    }
+    }*/
     const validateForm = () => {
-        const {titulo, categoria, relevancia, publicacion, documento} = infoTrabajosLibres
+        const {titulo, categoria, relevancia, publicacion} = infoTrabajosLibres
         const {palabrasClave1, palabrasClave2, palabrasClave3} = infoTrabajosLibres
         const newErros = {}
 
-        const extFile = /(.jpg|.JPG|.jpeg|.JPEG|.png|.PNG|.pdf|.PDF|.pptx|.PPTX|.docx|.DOCX)$/i;
+        //const extFile = /(.jpg|.JPG|.jpeg|.JPEG|.png|.PNG|.pdf|.PDF|.pptx|.PPTX|.docx|.DOCX)$/i;
         
         if(!categoria                  || categoria === ''                      || categoria === undefined) newErros.categoria = 'Categoría de la investigación obligatorio'
         if(!titulo                     || titulo === ''                         || titulo === undefined) newErros.titulo = 'Título de la investigación obligatorio'
@@ -55,14 +55,14 @@ export const FormularioTrabajo = ({listCategoryTrabajosLibres}) => {
         if(!palabrasClave2             || palabrasClave2 === ''                 || palabrasClave2 === undefined) newErros.palabrasClave2 = 'Palabra clave de la investigación obligatorio'
         if(!palabrasClave3             || palabrasClave3 === ''                 || palabrasClave3 === undefined) newErros.palabrasClave3 = 'Palabra clave de la investigación obligatorio'
         if(!publicacion                || publicacion === ''                    || publicacion === undefined) newErros.publicacion = 'Publicacion de la investigación obligatorio'
-        if(documento !== undefined && documento !== null){
+        /*if(documento !== undefined && documento !== null){
             if(documento.size > 500000){
                 newErros.documento = 'El tamaño permitido es de 500kb'
             }
             else if(!extFile.exec(documento.name)){
                 newErros.documento = 'Los formatos permitidos son jpg, jpeg, png, pdf, pptx, docx'
             }
-        } 
+        } */
 
         return newErros
     }
@@ -96,12 +96,12 @@ export const FormularioTrabajo = ({listCategoryTrabajosLibres}) => {
         })
     }
     const hangleSiguienteFace = (e) => {
-        if(infoTrabajosLibres.documento === undefined){
+        /*if(infoTrabajosLibres.documento === undefined){
             setInfoTrabajosLibres({
                 ...infoTrabajosLibres,
                 documento:null
             })
-        }
+        }*/
         e.preventDefault()
         const formErrors = validateForm();
         if(Object.keys(formErrors).length > 0){
