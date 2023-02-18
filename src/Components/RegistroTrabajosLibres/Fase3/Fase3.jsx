@@ -27,7 +27,7 @@ export const Fase3 = () => {
                     <div className='description-formulario-registro'>
                         <h5 className='text-center'><strong>INSTRUCCIONES PARA LA SECCIÓN 3</strong></h5>
                         <ul>
-                            <li>Seleccione la <strong>CATEGORÍA</strong> de participación entre las siguientes
+                            <li>Seleccione la <strong>EJES TEMÁTICOS</strong> de participación entre las siguientes
                               <ul>
                                 {listCategoryTrabajosLibres.length !== 0 ?
                                  listCategoryTrabajosLibres.map((item) => {

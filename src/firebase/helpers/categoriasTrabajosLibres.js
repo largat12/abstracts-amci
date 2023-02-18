@@ -3,7 +3,7 @@ import { dbApp } from "../configFirebase"
 
 export const categoriasTrabajosLibres = async () => {
     const collectionRef = collection(dbApp, 'trabajos-libres/reference/research-topic')
-    const queryRef = query(collectionRef, orderBy("name"))
+    const queryRef = query(collectionRef, orderBy("order"))
     let result = await getDocs(queryRef)
     if(result.docs.length !== 0){
         let reference = result.docs.map( (doc) => {

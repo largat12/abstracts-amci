@@ -9,7 +9,7 @@ export const FormularioTrabajo = ({listCategoryTrabajosLibres}) => {
     const {dataContextAppInvesitaciones, setDataContextAppInvesitaciones, nextSection, infoTrabajosLibres, setInfoTrabajosLibres} = useContext(ContextAppInvesitaciones)
     const [validated, setValidated] = useState(false)
     const [countEditor, setCountEditor] = useState(0);
-    const sizeLimit = 2500;
+    const sizeLimit = 2600;
 
     const changeField = (field, value) => {
         let valueField = value
@@ -119,7 +119,7 @@ export const FormularioTrabajo = ({listCategoryTrabajosLibres}) => {
         <Form onSubmit={hangleSiguienteFace} >
             <Row className='form-control p-4 mb-4'>
                 <Col xs={12}>
-                    <h6 className="text-left"><strong>CategorÍa de la investigación</strong></h6>
+                    <h6 className="text-left"><strong>Ejes temáticos de la investigación</strong></h6>
                     <Form.Select size="sm" name='categoria' placeholder='CategorÍa de la investigación' required onChange={(e) => {changeField(e.target.name, e.target.value)} } value={infoTrabajosLibres.categoria === undefined ? "" : infoTrabajosLibres.categoria}  isInvalid={!!validated.categoria}>
                         <option value=''>SELECCIONE UN CATEGORÍA</option>
                         {listCategoryTrabajosLibres.length !== 0
@@ -154,7 +154,7 @@ export const FormularioTrabajo = ({listCategoryTrabajosLibres}) => {
                 <Col xs={12}>
                 <h6 className="text-left"><strong>Resumen de la investigación</strong></h6>
                 <ul>
-                    <li>El resumen del trabajo no debe exceder los 2600 caracteres (260 palabras aprox.), el sistema automáticamente cortará el texto si este se excede.</li>
+                    <li>El resumen del trabajo no debe exceder los 2600 caracteres (equivalentes aproximadamente a 350 palabras), el sistema automáticamente cortará el texto si este se excede.</li>
                     <li>El resumen debe contener los siguientes parámetros exigidos para la evaluación:
                         <ol>
                             <li>Introducción</li>
@@ -200,7 +200,7 @@ export const FormularioTrabajo = ({listCategoryTrabajosLibres}) => {
                 <Col xs={12}>
                     <h6 className="text-left"><strong>Relevancia de la investigación</strong></h6>
                     <ul>
-                        <li>En este ítem describa brevemente cuál es la relevancia que usted considera que tiene su investigación para la Medicina Crítica.</li>
+                        <li>En este ítem describa brevemente la relevancia que usted considera que tiene su investigación para la Medicina Crítica.</li>
                     </ul>
                     <Form.Control as="textarea" rows="4" name='relevancia' required onChange={(e) => {changeField(e.target.name, e.target.value)} } value={infoTrabajosLibres.relevancia === undefined ? "" : infoTrabajosLibres.relevancia} isInvalid={!!validated.relevancia}></Form.Control>
                     <Form.Control.Feedback  type="invalid">
@@ -209,7 +209,7 @@ export const FormularioTrabajo = ({listCategoryTrabajosLibres}) => {
                     
                 </Col>
             </Row>
-            <Row className='form-control p-4 mb-4'>
+           {/* <Row className='form-control p-4 mb-4'>
                 <Col xs={12}>
                     <h6 className="text-left"><strong>Adjuntar la investigación</strong></h6>
                 </Col>
@@ -217,10 +217,10 @@ export const FormularioTrabajo = ({listCategoryTrabajosLibres}) => {
                 <Form.Control.Feedback  type="invalid">
                         {validated.documento}
                     </Form.Control.Feedback>
-            </Row>
+            </Row> */}
             <Row className='form-control p-4 mb-4'>
                 <Col xs={12}>
-                    <h6 className="text-left"><strong>Palabras Claves</strong></h6>
+                    <h6 className="text-left"><strong>Palabras Clave</strong></h6>
                     <FloatingLabel controlId='floatingPalabraClave' label="PALABRA CLAVE 1" className='mb-3'>
                         <Form.Control type='text' name='palabrasClave1' placeholder='PALABRA CLAVE 1' required onChange={(e) => {changeField(e.target.name, e.target.value)} } value={infoTrabajosLibres.palabrasClave1 === undefined ? "" : infoTrabajosLibres.palabrasClave1} isInvalid={!!validated.palabrasClave1}></Form.Control>
                         <Form.Control.Feedback  type="invalid">

@@ -2,6 +2,6 @@ import React from 'react'
 
 export const SessionActual = ({actual, total}) => {
   return (
-    <div className='session-header'>Session {actual} de {total}</div>
+    <div className='session-header'>Sección {actual} de {total}</div>
   )
 }
