@@ -4,7 +4,6 @@ import React, { useContext, useState } from 'react'
 import { Container, Row, Col, Button} from 'react-bootstrap'
 import { ContextAppInvesitaciones } from '../../../context/ContextAppInvesitaciones'
 import { statusInvestigacion } from '../../../firebase/helpers/statusInvestigacion'
-import { subirArchivos } from '../../../firebase/helpers/subirArchivos'
 import { subirInvestigacion } from '../../../firebase/helpers/subirInvestigacion'
 import { subirUsersInvestigadores } from '../../../firebase/helpers/subirUsersInvestigadores'
 import { updateUsersInvestidacion } from '../../../firebase/helpers/updateUsersInvestidacion'
@@ -28,11 +27,11 @@ export const Fase4 = () => {
       /*--------------------------------------------*/
       /*---------- subir trabajo libre ------------*/
       /*--------------------------------------------*/
-      if(infoTrabajosLibres.documento !== null){
+      /*if(infoTrabajosLibres.documento !== null){
         urlDocumento = await subirArchivos(infoTrabajosLibres.documento).then((response) => {
           return response
         })
-      }
+      }*/
       /*--------------------------------------------*/
       /*--------- Categorias de trabajos -----------*/
       /*--------------------------------------------*/

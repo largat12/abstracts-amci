@@ -1,0 +1,9 @@
+inscriptos
+Evaluada
+No evaluado
+Aceptado y no aceptado -> status
+
+
+Evaluaciones:
+- Evalaucion de resumen: 	70% - Metodologia 90 puntos (Asesores metologicos) - Clinita 10 puntos (Clinicos)
+- Evaluacion final: 		30% - 
