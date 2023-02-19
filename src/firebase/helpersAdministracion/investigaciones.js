@@ -8,9 +8,6 @@ export const investigaciones = async () => {
         let investigaciones = response.docs.map( (doc) => {
             return ( {id: doc.id, ...doc.data()}  )   
         })
-
-
-        
         return investigaciones
     }
     else {

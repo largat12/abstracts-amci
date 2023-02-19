@@ -1,3 +1,4 @@
+import './css/Dasshboard.css'
 import React from 'react'
 import { useContext } from 'react'
 import { ContextAppAdministracion } from '../../../context/ContextAppAdministracion'

@@ -7,9 +7,6 @@
   --text-color: #616163;
   --font-family: 'Chivo', sans-serif;
 }
-* {
-  word-break: break-all;
-}
 .form-control {
   margin: 0px;
 }

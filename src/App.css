@@ -11,6 +11,11 @@
     background: var(--bg-primary-hover);
     border-color: var(--bg-primary-hover);
 }
+.cortar-texto {
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    overflow: hidden;
+}
 button.btn-custom p {
     margin-bottom: 0px;
     display: flex;

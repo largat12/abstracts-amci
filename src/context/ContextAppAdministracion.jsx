@@ -28,7 +28,10 @@ export const ContextAppAdministracionProvider = ({children}) => {
     }
 
     const buscarInvestigaciones = () => {
-        investigaciones().then((response) => setListInvestiaciones([response]))
+        investigaciones().then((response) => {
+            setListInvestiaciones(response)
+            return response
+        })
     }
 
     return  <ContextAppAdministracion.Provider value={{userLogin, setUserLogin, pageDashboard, cambioDashboard, iniciarSesionFun, cerrarSesionFun, listIntestigaciones, setListInvestiaciones, buscarInvestigaciones}}>
