@@ -22,10 +22,7 @@ export const MenuAdministrador = () => {
                   <Nav.Link eventKey='investigadores'>Investigadores</Nav.Link>
                </Nav.Item>
                <Nav.Item>
-                  <Nav.Link eventKey='asignacion-jurados'>Asignacion de jurados</Nav.Link>
-               </Nav.Item>
-               <Nav.Item>
-                  <Nav.Link eventKey='evaluaciones'>Evaluaciones</Nav.Link>
+                  <Nav.Link eventKey='evaluaciones-asignadas'>Evaluaciones Asignadas</Nav.Link>
                </Nav.Item>
                <Nav.Item>
                   <Nav.Link eventKey='usuarios'>Usuarios</Nav.Link>

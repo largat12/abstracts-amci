@@ -4,7 +4,7 @@ import { ContextAppAdministracion } from '../../../context/ContextAppAdministrac
 import { buscarUser } from '../../../firebase/helpers/buscarUser';
 
 export const FormularioLogin = () => {
-    const { iniciarSesionFun } = useContext(ContextAppAdministracion)
+    const { iniciarSesionFun, cambioDashboard} = useContext(ContextAppAdministracion)
     const [iniciarSesion, setIniciarSesion] = useState({})
     const [validated, setValidated] = useState(false);
     const [errorUsuario, setErrorUsuario] = useState(true)
@@ -50,9 +50,11 @@ export const FormularioLogin = () => {
                 else{
                     setErrorUsuario(true)
                     setTextButton('Cargando...')
+                    cambioDashboard('investigaciones')
                     iniciarSesionFun(response)
                 }
             })
+
             
         }
     }

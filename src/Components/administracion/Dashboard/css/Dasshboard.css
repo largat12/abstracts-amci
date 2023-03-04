@@ -1,3 +1,17 @@
+.container-loading {
+    height: 80vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.container-loading .loading > p {
+    margin-bottom: 0px;
+    margin-left: 10px;
+}
+.container-login > .row > div.content-dashboard {
+    max-height: 100vh;
+    overflow: auto;
+}
 .table-content .thead {
     padding: 10px;
     background: #cdcdcd;
@@ -5,11 +19,11 @@
     box-shadow: 0 5px 10px rgb(0 0 0 / 5%);
 }
 
-.table-content .thead > div > div {
+.table-content .thead .border-right {
     border-right: 1px solid var(--bs-body-color);
 }
 
-.table-content .thead > div > div:last-child {
+.table-content .thead .border-right:last-child {
     border: none;
 }
 .table-content .tbody {
@@ -27,7 +41,75 @@
 .table-content .tbody > div:nth-of-type(odd) {
     background: #ededed;
 }
-.table-content .tbody > div > div {
+.table-content .tbody .container-fluid > div > div {
     display: flex;
     align-items: center;
+}
+.table-content .tbody p.estado > span {
+    padding: 5px 10px;
+    border: 1px solid black;
+    border-radius: 8px;
+    background: white;
+    box-shadow: 0 5px 10px rgb(0 0 0 / 10%);
+    display: block;
+    text-align: center;
+}
+
+input.inputSearch.form-control {
+    width: 300px;
+}
+
+.detalles-investigacion .puntuacion {
+    background: white;
+    box-shadow: 0 5px 10px rgb(0 0 0 / 10%);
+    padding: 20px;
+    border-radius: 8px;
+}
+
+.detalles-investigacion .puntuacion .total p.titlePuntos {
+    text-align: center;
+    font-size: 1.2rem;
+    text-transform: uppercase;
+    font-weight: bold;
+    margin-bottom: 0px;
+}
+
+.detalles-investigacion .puntuacion .total p.puntaje {
+    text-align: center;
+    font-size: 3rem;
+    margin-bottom: 0px;
+}
+
+.detalles-investigacion .puntuacion .total p.texto {
+    text-align: center;
+}
+.table-content .tbody p.cortar-texto.jurados {
+    display: flex;
+    flex-direction: column;
+}
+
+.table-content .tbody p.cortar-texto.jurados > span {
+    display: block;
+    padding: 5px 10px;
+    border-bottom: 1px solid black;
+    white-space: break-spaces;
+    margin-bottom: 10px;
+    box-shadow: 0 5px 10px rgb(0 0 0 / 10%);
+}
+.acciones.investigaciones .alert.acciones {
+    padding-top: 5px;
+    padding-bottom: 5px;
+    margin-top: 10px;
+}
+.detalles-investigacion .puntuacion .evaluadores h4 {
+    text-align: center;
+}
+
+.detalles-investigacion .puntuacion .evaluadores {
+    border-top: 1px solid black;
+    padding-top: 20px;
+}
+
+.detalles-investigacion .puntuacion .evaluadores p {
+    text-align: center;
 }

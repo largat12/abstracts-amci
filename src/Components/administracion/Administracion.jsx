@@ -7,10 +7,10 @@ export const Administracion = () => {
   return (
     <Container fluid className='contenedor-app-registro bg-lines container-login'>
       <Row>
-        <Col xs={2} className='p-0' style={{'box-shadow':'0 30px 90px rgb(0 0 0 / 17%)'}}>
+        <Col xs={2} className='p-0' style={{'boxShadow':'0 30px 90px rgb(0 0 0 / 17%)'}}>
             <SlideBar />
         </Col>
-        <Col xs={10} className='p-0'>
+        <Col xs={10} className='p-0 content-dashboard'>
             <Dashboard />
         </Col>
       </Row>

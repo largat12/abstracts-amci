@@ -20,7 +20,7 @@ export const Login = () => {
         <Col xs={12}>
           <Container className='form-login'>
             <Row>
-              <Col xs={12} className='d-flex justify-center align-center' style={{"flex-direction":"column"}}>
+              <Col xs={12} className='d-flex justify-center align-center' style={{"flexDirection":"column"}}>
                   <LogoAMCI />
                   <h1 className='mt-4 '>Iniciar Sesión</h1>
                   <FormularioLogin />
