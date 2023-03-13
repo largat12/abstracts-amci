@@ -15,6 +15,8 @@ export const DashboardInvestigadores = () => {
   },[])
 
   useEffect(()=>{
+      
+
       setContentInvestigadores(listInvestigadores)
       setBtnActualizar("Actualizado")
       setTimeout(()=>{
@@ -30,9 +32,10 @@ export const DashboardInvestigadores = () => {
 
   const handleViewInvestigadores = (id) => {
       cambioDashboard('detallesInvestigadores',{"tipo":"investigadores", "id":id})
-
   }
   
+  
+
   return (
     <Container fluid className='h-100 p-4'>
       <Row>

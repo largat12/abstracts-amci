@@ -1,10 +1,16 @@
 import React from 'react'
 import { Button, Col, Container, Row } from 'react-bootstrap'
+import { ContentNull } from '../../ContentNull/ContentNull'
 import { Loading } from '../../Loading/Loading'
 
 export const ListInvestigadores = ({contentInvestigadores, handleViewInvestigadores}) => {
-    //console.log('contentInvestigadores', contentInvestigadores)
-    if(contentInvestigadores.length === 0) return( <Loading/>)
+    
+    if(contentInvestigadores === null){
+        return (<ContentNull texto='No hay investigadores' />)
+    }
+    else if(contentInvestigadores.length === 0) {
+        return ( <Loading/> )
+    }
 
     return (
         <div className='table-content'>

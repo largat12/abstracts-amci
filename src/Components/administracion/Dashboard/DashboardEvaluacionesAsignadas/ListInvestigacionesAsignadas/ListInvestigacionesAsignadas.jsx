@@ -1,41 +1,29 @@
 import React from 'react'
-import { useState } from 'react'
-import { Container, Row, Col, Button } from 'react-bootstrap'
-import { ContentNull } from '../../ContentNull/ContentNull'
-import { Loading } from '../../Loading/Loading'
+import { Button, Col, Container, Row } from 'react-bootstrap'
 
-export const ListInvestigaciones = ({contentInvestigaciones, handleViewInvestigation, userLogin, contentCheckBox, setContentCheckBox}) => {
-    const [isChecked, setIsChecked] = useState({})
-    
-    const handleOnChange = (e) => {
-        const value = e.target.value
-        if(isChecked[value] === undefined || isChecked[value] === false){
-            setIsChecked({...isChecked,
-                [value]:true    
-            })
-            setContentCheckBox([...contentCheckBox, value])
-        }
-        else{
-            setIsChecked({...isChecked,
-                [value]:false    
-            })
-            let response =  []
-            contentCheckBox.forEach((item) => {
-                if(item !== value){
-                    response.push(item) 
-                }
-            })
-            setContentCheckBox([...response])
-        }
-    }
-    if(contentInvestigaciones === null){
-        return (<ContentNull texto='No hay investigaciones' />)
-    }
-    else if(contentInvestigaciones.length === 0) {
-        return (<Loading/>)
-    }
+export const ListInvestigacionesAsignadas = ({dataInvestigaciones, handleViewInvestigation, userLogin}) => {
+  
+  
+  if(dataInvestigaciones === null){
     return (
-        <div className='table-content'>
+      <Container fluid className='container-loading'>
+          <Row>
+              <Col xs={12}>
+                  <div className='loading d-flex'>
+                     No tiene investigaciones asignadas
+                  </div>
+              </Col>
+          </Row>
+      </Container>
+    )
+  }
+  else if(dataInvestigaciones.length === 0){
+    return <></>
+  }
+  
+  
+  return (
+    <div className='table-content'>
             <Container fluid className='thead p-0 pt-2 pb-2'>
                 <Row className='m-0'>
                     <Col className='p-0 m-0 border-right' style={{width:'40px', flex:'0 0 40px'}}>
@@ -57,14 +45,11 @@ export const ListInvestigaciones = ({contentInvestigaciones, handleViewInvestiga
                 </Row>
             </Container>
             <Container fluid className='tbody p-0'>
-                {contentInvestigaciones.map((item) => {
+                {dataInvestigaciones.map((item) => {
                     return (
                         <Row key={item.id} className='m-0 p-0 pt-2 pb-2'>
                             <Col className='p-0 m-0 d-flex justify-content-center align-items-center' style={{width:'40px', flex:'0 0 40px'}}>
-                                {userLogin.perfil === 'Administrador' ?
-                                    <input type='checkbox' className='form-check-input' name={item.id} value={item.id} checked={isChecked[item.id] === undefined || isChecked[item.id] === false ? false : true} onChange={handleOnChange}/>
-                                :
-                                ''}
+                                
                             </Col>
                             <Col className='p-0 m-0' style={{width:'calc(100% - 40px)', flex:'0 0 calc(100% - 40px)'}}>
                                 <Container fluid className='p-0 m-0'>
@@ -97,5 +82,5 @@ export const ListInvestigaciones = ({contentInvestigaciones, handleViewInvestiga
                 })}
             </Container>
         </div>
-    )
+  )
 }

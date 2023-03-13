@@ -9,7 +9,8 @@ export const exportarData = async (type) => {
         if(response.docs.length !== 0){
             let data = response.docs.map( (doc) => {
                 let data = {...doc.data()}
-                return ( {id: doc.id, ...data, date:data.date.toDate().toLocaleDateString('es-CO', { year:"numeric", month:"numeric", day:"numeric"}) , status:data.status[0].name, resumen:data.resumen.replace( /(<([^>]+)>)/ig, ''), titulo:data.titulo.replace( /(<([^>]+)>)/ig, '')})   
+                let modalidad = data.modalidad !==  undefined ? data.modalidad[0].name : 'SIN DEFINIR'
+                return ( {id: doc.id, ...data, date:data.date.toDate().toLocaleDateString('es-CO', { year:"numeric", month:"numeric", day:"numeric"}) , status:data.status[0].name, resumen:data.resumen.replace( /(<([^>]+)>)/ig, ''), titulo:data.titulo.replace( /(<([^>]+)>)/ig, ''), modalidad: modalidad})   
             })
             return data
         }

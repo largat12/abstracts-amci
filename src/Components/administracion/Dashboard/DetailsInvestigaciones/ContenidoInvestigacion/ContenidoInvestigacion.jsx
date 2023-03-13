@@ -1,11 +1,11 @@
 import { Markup } from 'interweave'
 import React from 'react'
 import { Accordion, Col, Container, Row } from 'react-bootstrap'
+import { DasnboardEvaluaciones } from '../../DashboardEvaluaciones/DasnboardEvaluaciones'
 import { Loading } from '../../Loading/Loading'
 
-export const ContenidoInvestigacion = ({contenidoInvestigacion}) => {
+export const ContenidoInvestigacion = ({contenidoInvestigacion, userLogin}) => {
   if(contenidoInvestigacion === null) return(<Loading />)
-  console.log('contenidoInvestigacion', contenidoInvestigacion)
   return (
     <Container fluid className='p-0'>
       <Row className='m-0'>
@@ -22,10 +22,25 @@ export const ContenidoInvestigacion = ({contenidoInvestigacion}) => {
                 <Col xs={2} className='p-0'>
                   <p><strong>Estado:</strong><br />{contenidoInvestigacion.status[0].name}</p>
                 </Col>
-                <Col xs={4} className='p-0'>
+                <Col xs={2} className='p-0'>
                   <p><strong>Fecha:</strong><br />{contenidoInvestigacion.date.toDate().toLocaleDateString('es-CO', { weekday:"long", year:"numeric", month:"numeric", day:"numeric"}) }</p>
                 </Col>
+                <Col xs={2} className='p-0'>
+                  <p><strong>Modalidad:</strong><br />{contenidoInvestigacion.modalidad !==  undefined ? contenidoInvestigacion.modalidad[0].name : 'SIN DEFINIR'}</p>
+                </Col>
               </Row>
+              
+              {contenidoInvestigacion.status[0].comentario !== undefined 
+                ? 
+                <Row className='m-0'>
+                  <Col xs={12} className='p-0'>
+                    <p><strong>Comentario de la modalidad:</strong><br />{contenidoInvestigacion.status[0].comentario}</p>
+                  </Col>
+                </Row>
+                : 
+                ''
+              }
+                
             </Container>
             <h3 className='titulos'>Título de la investigación</h3>
             <p>{contenidoInvestigacion.titulo}</p>
@@ -147,19 +162,24 @@ export const ContenidoInvestigacion = ({contenidoInvestigacion}) => {
                   <p className='puntaje'>{contenidoInvestigacion.totalPuntuacion}</p>
                   <p className='texto'>{contenidoInvestigacion.totalPuntuacion === 1 ? 'punto' : 'puntos'}</p>
               </div>
-                {
-                  contenidoInvestigacion.jurados.length !== 0 
-                  ? 
-                  <div className='evaluadores'>
-                      <h4>Evaluadores:</h4>
-                      {
-                        contenidoInvestigacion.jurados.map((element => {
-                          return <p key={element.id}>{element.nombre} {element.apellido} ({element.tipoEvaluacion})</p>
-                        }))
-                      }
-                      </div>
-                  : <></>
-                }
+              {
+                contenidoInvestigacion.jurados.length !== 0 && userLogin.perfil !== "Jurado"
+                ? 
+                <div className='evaluadores'>
+                    <h4>Evaluadores:</h4>
+                    {
+                      contenidoInvestigacion.jurados.map((element => {
+                        return <p key={element.id}>{element.nombre} {element.apellido} ({element.tipoEvaluacion})</p>
+                      }))
+                    }
+                    </div>
+                : <></>
+              }
+
+              {
+                contenidoInvestigacion.status[0].value !== 3 && contenidoInvestigacion.status[0].value !== 5 ? <DasnboardEvaluaciones contenidoInvestigacion={contenidoInvestigacion} /> : ''
+              }
+              
           </div>
         </Col>
       </Row>

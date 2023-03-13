@@ -64,13 +64,13 @@ export const FormularioLogin = () => {
             <Row>
                 <Col xs={12}>
                     <FloatingLabel label="EMAIL" className='mb-4'>
-                        <Form.Control type='email' placeholder='EMAIL' name='email' required onChange={ (e) => {changeField(e.target.name, e.target.value)} } value={iniciarSesion.email === undefined ? "" : iniciarSesion.titulo} isInvalid={!!validated.email}/>
+                        <Form.Control type='email' placeholder='EMAIL' name='email' autoComplete="username" required onChange={ (e) => {changeField(e.target.name, e.target.value)} } value={iniciarSesion.email === undefined ? "" : iniciarSesion.email} isInvalid={!!validated.email}/>
                         <Form.Control.Feedback  type="invalid">
                             {validated.email}
                         </Form.Control.Feedback>
                     </FloatingLabel>
                     <FloatingLabel label="PASSWORD" className='mb-4'>
-                        <Form.Control type='password' placeholder='PASSWORD' name='password' required onChange={ (e) => {changeField(e.target.name, e.target.value)} } value={iniciarSesion.password === undefined ? "" : iniciarSesion.password} isInvalid={!!validated.password}/>
+                        <Form.Control type='password' placeholder='PASSWORD' name='password' autoComplete="current-password" required onChange={ (e) => {changeField(e.target.name, e.target.value)} } value={iniciarSesion.password === undefined ? "" : iniciarSesion.password} isInvalid={!!validated.password}/>
                         <Form.Control.Feedback  type="invalid">
                             {validated.password}
                         </Form.Control.Feedback>

@@ -2,8 +2,8 @@ import React, { useContext } from 'react'
 import { Col, Container, Row,  Nav } from 'react-bootstrap'
 import { ContextAppAdministracion } from '../../../../context/ContextAppAdministracion'
 
-export const MenuAdministrador = () => {
-  const { cambioDashboard } = useContext(ContextAppAdministracion)
+export const Menu = () => {
+  const { cambioDashboard, userLogin} = useContext(ContextAppAdministracion)
 
   const handleSelectDasboard = (selectedKey) => {
     cambioDashboard(selectedKey)
@@ -24,12 +24,21 @@ export const MenuAdministrador = () => {
                <Nav.Item>
                   <Nav.Link eventKey='evaluaciones-asignadas'>Evaluaciones Asignadas</Nav.Link>
                </Nav.Item>
-               <Nav.Item>
-                  <Nav.Link eventKey='usuarios'>Usuarios</Nav.Link>
-               </Nav.Item>
-               <Nav.Item>
-                  <Nav.Link eventKey='exportar'>Exportar Data</Nav.Link>
-               </Nav.Item>
+               { userLogin.perfil !== 'Jurado'
+               ? 
+               <>
+                  <Nav.Item>
+                     <Nav.Link eventKey='usuarios'>Usuarios</Nav.Link>
+                  </Nav.Item>
+                  <Nav.Item>
+                     <Nav.Link eventKey='exportar'>Exportar Data</Nav.Link>
+                  </Nav.Item>
+               </>
+               :
+               ''
+               }
+               
+               
             </Nav>
         </Col>
       </Row>

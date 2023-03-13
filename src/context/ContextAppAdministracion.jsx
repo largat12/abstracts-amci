@@ -3,16 +3,20 @@ import { useNavigate } from "react-router-dom";
 import { anadirUsuario } from "../firebase/helpersAdministracion/anadirUsuario";
 import { contenidoInvestigacionCompleta } from "../firebase/helpersAdministracion/contenidoInvestigacionCompleta";
 import { eliminarUsuario } from "../firebase/helpersAdministracion/eliminarUsuario";
+import { estados } from "../firebase/helpersAdministracion/estados";
 import { exportarData } from "../firebase/helpersAdministracion/exportarData";
 import { investigaciones } from "../firebase/helpersAdministracion/investigaciones";
 import { investigadores } from "../firebase/helpersAdministracion/investigadores";
 import { jurados } from "../firebase/helpersAdministracion/jurados";
+import { modalidad } from "../firebase/helpersAdministracion/modalidad";
+import { updateEstados } from "../firebase/helpersAdministracion/updateEstados";
 import { updateJurados } from "../firebase/helpersAdministracion/updateJurados";
+import { updateModalidad } from "../firebase/helpersAdministracion/updateModalidad";
 import { usuariosPlataforma } from "../firebase/helpersAdministracion/usuariosPlataforma";
 
 export const ContextAppAdministracion = createContext()
 export const ContextAppAdministracionProvider = ({children}) => {
-    const [userLogin, setUserLogin,] = useState(sessionStorage.getItem('userLogin') === null || sessionStorage.getItem('userLogin') === '{}' ? null :  JSON.parse( sessionStorage.getItem('userLogin') ) )
+    const [userLogin, setUserLogin] = useState(sessionStorage.getItem('userLogin') === null || sessionStorage.getItem('userLogin') === '{}' ? null :  JSON.parse( sessionStorage.getItem('userLogin') ) )
     const [pageDashboard, setPageDashboard] = useState({page:'investigaciones',item:null})
     const [listInvestigaciones, setListInvestigaciones] = useState([])
     const [listInvestigadores, setListInvestigadores] = useState([])
@@ -32,25 +36,82 @@ export const ContextAppAdministracionProvider = ({children}) => {
         navigate("/")
     }
 
-    const cambioDashboard = (page, item = null) => {
-        setPageDashboard({page, item})
+    const cambioDashboard = (page, item = null, contenidoInvestigacion = null) => {
+        setPageDashboard({page, item, contenidoInvestigacion})
     }
 
     const buscarInvestigaciones = () => {
         investigaciones().then((response) => {
-            setListInvestigaciones(response)
-            return response
+            if(userLogin.perfil === 'Jurado'){
+                if(response.length !== 0){
+                    const data = []
+                    response.forEach((investigacion) => {
+                        if(investigacion.jurados.length !== 0){
+                            investigacion.jurados.forEach((jurado) => {
+                                if(userLogin.id === jurado.id){
+                                    data.push(investigacion)
+                                }
+                            })
+                        }
+                    })
+                    if(data.length === 0){
+                        setListInvestigaciones(null)
+                        return null
+                    }
+                    else{
+                        setListInvestigaciones(data)
+                        return data
+                    }
+                }
+                else{
+                    setListInvestigaciones([])
+                    return []
+                }
+            }
+            else{
+                setListInvestigaciones(response)
+                return response
+            }
+            
         })
     }
 
     const buscarInvestigadores = () => {
-        investigadores().then((response) => {
-            setListInvestigadores(response)
-            return response
+        investigadores(userLogin).then((response) => {
+            if(userLogin.perfil === 'Jurado'){
+                if(response.length !== 0){
+                    const data = []
+                    response.forEach((investigadores) => {
+                        if(investigadores.jurados.length !== 0){
+                            investigadores.jurados.forEach((jurado) => {
+                                if(userLogin.id === jurado.id){
+                                    data.push(investigadores)
+                                }
+                            })
+                        }
+                    })
+                    if(data.length === 0){
+                        setListInvestigadores(null)
+                        return null
+                    }
+                    else{
+                        setListInvestigadores(data)
+                        return data
+                    }
+                }
+                else{
+                    setListInvestigadores([])
+                    return []
+                }
+            }
+            else{
+                setListInvestigadores(response)
+                return response
+            }
         })
 
     }
-
+    
     const buscarContenidoInvestigacionCompleta = () => {
         return contenidoInvestigacionCompleta(pageDashboard)
     }
@@ -78,14 +139,32 @@ export const ContextAppAdministracionProvider = ({children}) => {
     const buscarExportarExcel = (type) => {
         return exportarData(type)
     }
+    
     const buscarJurados = () => {
         return jurados()
     }
+
+    const buscarEstadosInvestigaciones = () => {
+        return estados()
+    }
+
+    const buscarModalidadInvestigaciones = () => {
+        return modalidad()
+    }
+
     const updateJuradosInvestigacion = (dataJuradoInvestigaciones, dataJurado, dataJurdadoInvestigaciones) => {
         return updateJurados(dataJuradoInvestigaciones, dataJurado, dataJurdadoInvestigaciones)
     }
 
-    return  <ContextAppAdministracion.Provider value={{userLogin, setUserLogin, pageDashboard, cambioDashboard, iniciarSesionFun, cerrarSesionFun, listInvestigaciones, setListInvestigaciones, buscarInvestigaciones, buscarContenidoInvestigacionCompleta, listInvestigadores, setListInvestigadores, buscarInvestigadores, buscarUsuariosPlataforma, contenidoUsuarios, buscarEliminarUsuario, buscarAnadirUsuario, buscarExportarExcel, buscarJurados, updateJuradosInvestigacion}}>
+    const updateEstadoInvestigacion = (estadoSeleccionado, contentCheckBox) => {
+        return updateEstados(estadoSeleccionado, contentCheckBox)
+    }
+    
+    const updateModalidadInvestigacion = (modalidadSeleccionado, contentCheckBox) => {
+        return updateModalidad(modalidadSeleccionado, contentCheckBox)
+    }
+
+    return  <ContextAppAdministracion.Provider value={{userLogin, setUserLogin, pageDashboard, cambioDashboard, iniciarSesionFun, cerrarSesionFun, listInvestigaciones, setListInvestigaciones, buscarInvestigaciones, buscarContenidoInvestigacionCompleta, listInvestigadores, setListInvestigadores, buscarInvestigadores, buscarUsuariosPlataforma, contenidoUsuarios, buscarEliminarUsuario, buscarAnadirUsuario, buscarExportarExcel, buscarJurados, buscarEstadosInvestigaciones, buscarModalidadInvestigaciones, updateJuradosInvestigacion, updateEstadoInvestigacion, updateModalidadInvestigacion}}>
                 {children}
             </ContextAppAdministracion.Provider>
 }

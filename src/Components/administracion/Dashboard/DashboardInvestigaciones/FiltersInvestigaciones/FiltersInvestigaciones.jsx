@@ -6,7 +6,6 @@ import { Button, Col, Container, Form, Row } from 'react-bootstrap'
 
 export const FiltersInvestigaciones = ({listInvestigaciones, contentInvestigaciones, setContentInvestigaciones}) => {
   const [valueForm, setValueForm] = useState({})
-
   const changeField = (field, value) => {
     setValueForm({
       ...valueForm,
@@ -20,11 +19,14 @@ export const FiltersInvestigaciones = ({listInvestigaciones, contentInvestigacio
       })
       setContentInvestigaciones(response)
   }
+  if(listInvestigaciones === null){
+      return (<></>)
+  }
   return (
     <Container fluid className='p-0 m-0 mt-4 mb-4'>
       <Row className='m-0 p-0'>
         <Col xs={3} className='p-0 d-flex align-content-center align-items-center'>
-           <p className='items-total-investigaciones m-0'>Total de investigaciones {listInvestigaciones.length} de {contentInvestigaciones.length}</p>
+        <p className='items-total-investigaciones m-0'>Total de investigaciones {listInvestigaciones.length} de {contentInvestigaciones.length}</p>
         </Col>
         <Col xs={9} className='p-0 d-flex justify-content-end'>
           <Form onSubmit={handleFilterInvestigaciones} className='d-flex'>

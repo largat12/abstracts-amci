@@ -6,7 +6,7 @@ import { ContextAppAdministracion } from '../../../../context/ContextAppAdminist
 import { ContenidoInvestigacion } from './ContenidoInvestigacion/ContenidoInvestigacion'
 
 export const DetailsInvestigaciones = () => {
-    const {cambioDashboard, pageDashboard, buscarContenidoInvestigacionCompleta} = useContext(ContextAppAdministracion)
+    const {cambioDashboard, pageDashboard, buscarContenidoInvestigacionCompleta, userLogin} = useContext(ContextAppAdministracion)
     const [contenidoInvestigacion, setContenidoInvestigacion] = useState(null)
 
     useEffect(()=>{
@@ -19,6 +19,7 @@ export const DetailsInvestigaciones = () => {
         let page  = pageDashboard.item.tipo === 'investigacion' ? 'investigaciones' : 'investigadores'
         cambioDashboard(page)
     }
+    
     return (
         <Container fluid className='h-100 p-4 detalles-investigacion'>
             <Row>
@@ -32,7 +33,7 @@ export const DetailsInvestigaciones = () => {
                             
                         </Row>
                     </Container>
-                    <ContenidoInvestigacion contenidoInvestigacion={contenidoInvestigacion}/>
+                    <ContenidoInvestigacion contenidoInvestigacion={contenidoInvestigacion} userLogin={userLogin} />
                   </Col>
             </Row>
         </Container>

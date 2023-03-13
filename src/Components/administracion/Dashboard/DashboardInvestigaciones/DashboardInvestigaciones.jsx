@@ -1,13 +1,16 @@
+
 import React, { useEffect, useState ,useContext } from 'react'
 import { Container, Row, Col, Button } from 'react-bootstrap'
 import { ContextAppAdministracion } from '../../../../context/ContextAppAdministracion'
 import { AccionesAsignarJurado } from './AccionesInvestigaciones/AccionesAsignarJurado'
+import { AccionesCambiarEstado } from './AccionesInvestigaciones/AccionesCambiarEstado'
+import { AccionesModalidadInvestigacion } from './AccionesInvestigaciones/AccionesModalidadInvestigacion'
 import { SeleccionarAccionInvestigaciones } from './AccionesInvestigaciones/SeleccionarAccionInvestigaciones'
 import { FiltersInvestigaciones } from './FiltersInvestigaciones/FiltersInvestigaciones'
 import { ListInvestigaciones } from './ListInvestigaciones/ListInvestigaciones'
 
 export const DashboardInvestigaciones = () => {
-    const {buscarInvestigaciones, listInvestigaciones, cambioDashboard, userLogin, buscarJurados, updateJuradosInvestigacion} = useContext(ContextAppAdministracion)
+    const {buscarInvestigaciones, listInvestigaciones, cambioDashboard, userLogin, buscarJurados, buscarEstadosInvestigaciones,  buscarModalidadInvestigaciones, updateJuradosInvestigacion, updateEstadoInvestigacion, updateModalidadInvestigacion} = useContext(ContextAppAdministracion)
     const [contentInvestigaciones, setContentInvestigaciones] = useState([])
     const [btnActualizar, setBtnActualizar] = useState("Actualizar investigaciones")
     const [contentCheckBox, setContentCheckBox] = useState([])
@@ -35,11 +38,9 @@ export const DashboardInvestigaciones = () => {
         buscarInvestigaciones()
         setBtnActualizar("Actualizando...")
     }
-
     const handleViewInvestigation = (id) => {
         cambioDashboard('detallesInvestigacion',{"tipo":"investigacion", "id":id})
     }
-
     const handleAsignarJurados = (seleccionado, jurados) => {
         
         let status = false;
@@ -118,6 +119,30 @@ export const DashboardInvestigaciones = () => {
 
         
     }
+    const handleCambiarEstado = (seleccionado, estados) => {
+        let estadoSeleccionado = estados.find( item => item.id === seleccionado.asignarEstado)
+        if(seleccionado.asignarComentario !== undefined){
+            estadoSeleccionado['comentario'] = seleccionado.asignarComentario
+        }
+        updateEstadoInvestigacion(estadoSeleccionado, contentCheckBox).then(response => {
+            buscarInvestigaciones()
+            setMessageAlert({'type':'success','message':'Estado asignado'})
+        })
+        setTimeout(() => {
+            setMessageAlert({})
+        }, 5000)
+    }
+    const handleCambiarModalidad = (seleccionado, modalidades) => {
+        let modalidadSeleccionado = modalidades.find( item => item.id === seleccionado.asignarEstado)
+        updateModalidadInvestigacion(modalidadSeleccionado, contentCheckBox).then(response => {
+            buscarInvestigaciones()
+            setMessageAlert({'type':'success','message':'Estado asignado'})
+        })
+        setTimeout(() => {
+            setMessageAlert({})
+        }, 5000)
+    }
+
     
     
     return (
@@ -135,7 +160,9 @@ export const DashboardInvestigaciones = () => {
                     ?  
                     <>
                         <SeleccionarAccionInvestigaciones contentCheckBox={contentCheckBox} setStateAcciones={setStateAcciones}/>
-                        {stateAcciones === 'asignar-jurados' && <AccionesAsignarJurado contentCheckBox={contentCheckBox} buscarJurados={buscarJurados} handleAsignarJurados={handleAsignarJurados} messageAlert={messageAlert}/>}
+                        {stateAcciones === 'asignar-jurados'   && <AccionesAsignarJurado            contentCheckBox={contentCheckBox}  buscarJurados={buscarJurados} handleAsignarJurados={handleAsignarJurados} messageAlert={messageAlert}/>}
+                        {stateAcciones === 'cambiar-estado'    && <AccionesCambiarEstado            contentCheckBox={contentCheckBox}  buscarEstadosInvestigaciones={buscarEstadosInvestigaciones} handleCambiarEstado={handleCambiarEstado} messageAlert={messageAlert}/>}
+                        {stateAcciones === 'cambiar-modalidad' && <AccionesModalidadInvestigacion   contentCheckBox={contentCheckBox}  buscarModalidadInvestigaciones={buscarModalidadInvestigaciones} handleCambiarModalidad={handleCambiarModalidad} messageAlert={messageAlert}/>}
                     </>
                     : ''}
                     

@@ -8,6 +8,8 @@ import { DashboradUsuarios } from './DashboradUsuarios/DashboradUsuarios'
 import { DashboardExportarData } from './DashboardExportarData/DashboardExportarData'
 import { AnadirUsuario } from './DashboradUsuarios/AnadirUsuario/AnadirUsuario'
 import { DashboardEvaluacionesAsignadas } from './DashboardEvaluacionesAsignadas/DashboardEvaluacionesAsignadas'
+import { EvaluacionesMetodologico } from './DashboardEvaluaciones/Evaluaciones/EvaluacionesMetodologico'
+import { EvaluacionesClinico } from './DashboardEvaluaciones/Evaluaciones/EvaluacionesClinico'
 
 export const Dashboard = () => {
   const { pageDashboard } = useContext(ContextAppAdministracion)
@@ -18,4 +20,8 @@ export const Dashboard = () => {
   else if(pageDashboard.page === 'usuarios') return <DashboradUsuarios />
   else if(pageDashboard.page === 'anadirUsuario') return <AnadirUsuario />
   else if(pageDashboard.page === 'exportar') return <DashboardExportarData />
+  else if(pageDashboard.page === 'evaluacion-metodologico') return <EvaluacionesMetodologico contenidoInvestigacion={pageDashboard.contenidoInvestigacion}/>
+  else if(pageDashboard.page === 'evaluacion-metodologico') return <EvaluacionesClinico contenidoInvestigacion={pageDashboard.contenidoInvestigacion}/>
+
+  return <></>
 }
